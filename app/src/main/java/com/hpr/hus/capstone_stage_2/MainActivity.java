@@ -1,10 +1,14 @@
 package com.hpr.hus.capstone_stage_2;
 
+
+import android.content.Intent;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -15,9 +19,34 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main_3);
 
-        // populate  RecyclerView
+
+
+        Bundle selectedRecipeBundle = new Bundle();
+        ArrayList<Integer> selectedRecipe = new ArrayList<>();
+      //  selectedRecipe.add(clickedItemIndex);
+      //  selectedRecipeBundle.putParcelableArrayList("Select_Recipe",selectedRecipe);
+        Log.v("jjj", "onListItemClick");
+        final Intent intent = new Intent(this, MessageDetailActivity.class);
+        intent.putExtras(selectedRecipeBundle);
+         startActivity(intent);
+
+
+
+
+
+
+
+
+        /*MasterListFragment masterListFragment = new MasterListFragment();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+
+        fragmentManager.beginTransaction()
+                .add(R.id.list_container,masterListFragment)
+                .commit();*/
+
+       /* // populate  RecyclerView
         ArrayList<String> placeHolder = new ArrayList<>();
         placeHolder.add("Message 1");
         placeHolder.add("Message 2");
@@ -44,7 +73,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
         //Adding divider
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(),
                 layoutManager.getOrientation());
-        recyclerView.addItemDecoration(dividerItemDecoration);
+        recyclerView.addItemDecoration(dividerItemDecoration);*/
 
 
 

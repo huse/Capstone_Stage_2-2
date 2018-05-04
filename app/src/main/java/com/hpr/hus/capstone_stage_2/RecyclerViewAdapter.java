@@ -2,6 +2,7 @@ package com.hpr.hus.capstone_stage_2;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,8 +21,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         this.mInflater = LayoutInflater.from(context);
         this.mData = data;
     }
-
-    // inflates row layout from xml whenever needs
+    public RecyclerViewAdapter(ItemClickListener listener,Context context, List<String> data) {
+        Log.v("uuu11", "RecipeAdapter object made");
+        this.mInflater = LayoutInflater.from(context);
+        this.mData = data;
+        mClickListener = listener;
+    }
+        // inflates row layout from xml whenever needs
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = mInflater.inflate(R.layout.recyclerview_layout, parent, false);

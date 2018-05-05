@@ -2,20 +2,16 @@ package com.hpr.hus.capstone_stage_2;
 
 
 import android.content.Intent;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
-import java.util.ArrayList;
+import com.hpr.hus.capstone_stage_2.login.LoginActivity;
 
-public class MainActivity extends AppCompatActivity implements RecyclerViewAdapter.ItemClickListener{
-    RecyclerViewAdapter adapter;
+public class MainActivity extends AppCompatActivity implements RecyclerViewAdapterList.ItemClickListener{
+    RecyclerViewAdapterList adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,11 +20,8 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
 
 
         Bundle selectedRecipeBundle = new Bundle();
-        ArrayList<Integer> selectedRecipe = new ArrayList<>();
-      //  selectedRecipe.add(clickedItemIndex);
-      //  selectedRecipeBundle.putParcelableArrayList("Select_Recipe",selectedRecipe);
-        Log.v("jjj", "onListItemClick");
-        final Intent intent = new Intent(this, MessageDetailActivity.class);
+        Log.v("hhh", "MainActivity   onCreate ");
+        final Intent intent = new Intent(this, LoginActivity.class);
         intent.putExtras(selectedRecipeBundle);
          startActivity(intent);
 

@@ -8,7 +8,6 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,11 +16,11 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class ListMessageFragment extends Fragment implements RecyclerViewAdapter.ItemClickListener{
+public class ListMessageFragment extends Fragment implements RecyclerViewAdapterList.ItemClickListener{
     public ListMessageFragment( ){
 
     }
-    RecyclerViewAdapter adapter;
+    RecyclerViewAdapterList adapter;
 
     @Nullable
     @Override
@@ -45,7 +44,7 @@ public class ListMessageFragment extends Fragment implements RecyclerViewAdapter
        // Log.v("hhh",getView().toString());
         RecyclerView recyclerView = rootView.findViewById(R.id.rvMessages);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        adapter = new RecyclerViewAdapter(this,getActivity(),placeHolder);
+        adapter = new RecyclerViewAdapterList(this,getActivity(),placeHolder);
         //adapter.setClickListener(new LinearLayoutManager(getActivity());
         recyclerView.setAdapter(adapter);
 

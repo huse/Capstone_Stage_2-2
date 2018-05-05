@@ -10,18 +10,18 @@ import android.widget.TextView;
 
 import java.util.List;
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
+public class RecyclerViewAdapterList extends RecyclerView.Adapter<RecyclerViewAdapterList.ViewHolder> {
 
     private List<String> mData;
     private LayoutInflater mInflater;
     private ItemClickListener mClickListener;
 
     // data passed to constructor
-    RecyclerViewAdapter(Context context, List<String> data) {
+    RecyclerViewAdapterList(Context context, List<String> data) {
         this.mInflater = LayoutInflater.from(context);
         this.mData = data;
     }
-    public RecyclerViewAdapter(ItemClickListener listener,Context context, List<String> data) {
+    public RecyclerViewAdapterList(ItemClickListener listener, Context context, List<String> data) {
         Log.v("uuu11", "RecipeAdapter object made");
         this.mInflater = LayoutInflater.from(context);
         this.mData = data;

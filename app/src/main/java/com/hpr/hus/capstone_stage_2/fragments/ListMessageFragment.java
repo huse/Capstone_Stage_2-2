@@ -1,4 +1,4 @@
-package com.hpr.hus.capstone_stage_2;
+package com.hpr.hus.capstone_stage_2.fragments;
 
 
 import android.os.Bundle;
@@ -13,6 +13,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+
+import com.hpr.hus.capstone_stage_2.R;
+import com.hpr.hus.capstone_stage_2.recycler.RecyclerViewAdapterList;
 
 import java.util.ArrayList;
 
@@ -33,15 +36,15 @@ public class ListMessageFragment extends Fragment implements RecyclerViewAdapter
 
         // populate  RecyclerView
         ArrayList<String> placeHolder = new ArrayList<>();
-        placeHolder.add("Message 1");
-        placeHolder.add("Message 2");
-        placeHolder.add("Message 3");
-        placeHolder.add("Message 4");
-        placeHolder.add("Message 5");
-        placeHolder.add("Message 6");
-        placeHolder.add("Message 7");
-        placeHolder.add("Message 8");
-        placeHolder.add("Message 9");
+        placeHolder.add("Person 1");
+        placeHolder.add("Person 2");
+        placeHolder.add("Person 3");
+        placeHolder.add("Person 4");
+        placeHolder.add("Person 5");
+        placeHolder.add("Person 6");
+        placeHolder.add("Person 7");
+        placeHolder.add("Person 8");
+        placeHolder.add("Person 9");
 
 
         // setting up RecyclerView

@@ -1,11 +1,13 @@
-package com.hpr.hus.capstone_stage_2;
+package com.hpr.hus.capstone_stage_2.activities;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
-import java.util.ArrayList;
+import com.hpr.hus.capstone_stage_2.R;
+import com.hpr.hus.capstone_stage_2.fragments.ContentMessageFragment;
+import com.hpr.hus.capstone_stage_2.fragments.ListMessageFragment;
 
 public class MessageDetailActivity extends AppCompatActivity {
     static String STEP_STACK_DETAIL="Step_Stack_detail";

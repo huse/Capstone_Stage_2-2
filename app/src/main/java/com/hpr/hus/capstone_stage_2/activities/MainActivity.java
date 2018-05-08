@@ -1,4 +1,4 @@
-package com.hpr.hus.capstone_stage_2;
+package com.hpr.hus.capstone_stage_2.activities;
 
 
 import android.content.Intent;
@@ -6,9 +6,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
-import com.hpr.hus.capstone_stage_2.login.LoginActivity;
+import com.hpr.hus.capstone_stage_2.R;
+import com.hpr.hus.capstone_stage_2.activities.MessageDetailActivity;
+import com.hpr.hus.capstone_stage_2.recycler.RecyclerViewAdapterList;
 
 import java.util.ArrayList;
 
@@ -83,7 +84,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
     //Adding action lestenter to recyclereview.
     @Override
     public void onItemClick(View view, int position) {
-        Toast.makeText(this, "You clicked " + adapter.getItem(position) + " on row number " + position, Toast.LENGTH_SHORT).show();
+       // Toast.makeText(this, "You clicked " + adapter.getItem(position) + " on row number " + position, Toast.LENGTH_SHORT).show();
     }
 
 

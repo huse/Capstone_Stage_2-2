@@ -1,4 +1,4 @@
-package com.hpr.hus.capstone_stage_2;
+package com.hpr.hus.capstone_stage_2.recycler;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -8,35 +8,37 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.hpr.hus.capstone_stage_2.R;
+
 import java.util.List;
 
-public class RecyclerViewAdapterList extends RecyclerView.Adapter<RecyclerViewAdapterList.ViewHolder> {
+public class RecyclerViewAdapterMessages extends RecyclerView.Adapter<RecyclerViewAdapterMessages.ViewHolder> {
 
     private List<String> mData;
     private LayoutInflater mInflater;
-    private ItemClickListener mClickListener;
+    private RecyclerViewAdapterMessages.ItemClickListener mClickListener;
 
     // data passed to constructor
-    RecyclerViewAdapterList(Context context, List<String> data) {
+    RecyclerViewAdapterMessages(Context context, List<String> data) {
         this.mInflater = LayoutInflater.from(context);
         this.mData = data;
     }
-    public RecyclerViewAdapterList(ItemClickListener listener, Context context, List<String> data) {
-        Log.v("uuu11", "RecipeAdapter object made");
+    public RecyclerViewAdapterMessages(RecyclerViewAdapterMessages.ItemClickListener listener, Context context, List<String> data) {
+        Log.v("uuu11", "RecyclerViewAdapterMessages object made");
         this.mInflater = LayoutInflater.from(context);
         this.mData = data;
         mClickListener = listener;
     }
-        // inflates row layout from xml whenever needs
+    // inflates row layout from xml whenever needs
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = mInflater.inflate(R.layout.recyclerview_layout, parent, false);
-        return new ViewHolder(view);
+    public RecyclerViewAdapterMessages.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = mInflater.inflate(R.layout.recyclerview_layout_messages, parent, false);
+        return new RecyclerViewAdapterMessages.ViewHolder(view);
     }
 
     // bindING   data to TextView in row
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerViewAdapterMessages.ViewHolder holder, int position) {
         String animal = mData.get(position);
         holder.myTextView.setText(animal);
     }
@@ -54,7 +56,7 @@ public class RecyclerViewAdapterList extends RecyclerView.Adapter<RecyclerViewAd
 
         ViewHolder(View itemView) {
             super(itemView);
-            myTextView = itemView.findViewById(R.id.tvMessageName);
+            myTextView = itemView.findViewById(R.id.tvMessageContentRV);
             itemView.setOnClickListener(this);
         }
 
@@ -65,16 +67,16 @@ public class RecyclerViewAdapterList extends RecyclerView.Adapter<RecyclerViewAd
     }
 
     // method for getting data at clicked position
-    String getItem(int id) {
+   public String getItem(int id) {
         return mData.get(id);
     }
 
     // allowing to click event to be caught
-    void setClickListener(ItemClickListener itemClickListener) {
+   public void setClickListener(RecyclerViewAdapterMessages.ItemClickListener itemClickListener) {
         this.mClickListener = itemClickListener;
     }
 
-    // parent activity would implement thhis methods for responding to click event
+    // parent activity would implement this methods for responding to click event
     public interface ItemClickListener {
         void onItemClick(View view, int position);
     }

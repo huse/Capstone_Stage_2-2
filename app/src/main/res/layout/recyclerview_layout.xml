@@ -20,12 +20,26 @@
         android:layout_height="wrap_content"
         android:textSize="20sp"
         app:layout_constraintStart_toEndOf="@id/action_image"
-        app:layout_constraintEnd_toEndOf="parent"
+
+
+
+        app:layout_constraintTop_toTopOf="parent"
         android:hint="TextView"
 
 
         />
+    <TextView
+        android:id="@+id/tvMessageContentRV"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@id/action_image"
 
+        app:layout_constraintTop_toBottomOf="@id/tvMessageName"
+        android:hint="Message content"
+
+
+        />
     </android.support.constraint.ConstraintLayout>
 
 

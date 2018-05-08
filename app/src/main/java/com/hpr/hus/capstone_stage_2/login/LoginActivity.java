@@ -34,7 +34,7 @@ import java.util.List;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
-import com.hpr.hus.capstone_stage_2.MessageDetailActivity;
+import com.hpr.hus.capstone_stage_2.activities.MessageDetailActivity;
 import com.hpr.hus.capstone_stage_2.R;
 /**
  * A login screen that offers login via email/password.

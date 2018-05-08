@@ -10,6 +10,8 @@ import android.widget.Toast;
 
 import com.hpr.hus.capstone_stage_2.login.LoginActivity;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity implements RecyclerViewAdapterList.ItemClickListener{
     RecyclerViewAdapterList adapter;
     @Override
@@ -18,14 +20,21 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
         setContentView(R.layout.activity_main_3);
 
 
-
+/*
         Bundle selectedRecipeBundle = new Bundle();
         Log.v("hhh", "MainActivity   onCreate ");
         final Intent intent = new Intent(this, LoginActivity.class);
         intent.putExtras(selectedRecipeBundle);
-         startActivity(intent);
+         startActivity(intent)*/;
 
-
+        Bundle selectedRecipeBundle = new Bundle();
+        ArrayList<Integer> selectedRecipe = new ArrayList<>();
+        //  selectedRecipe.add(clickedItemIndex);
+        //  selectedRecipeBundle.putParcelableArrayList("Select_Recipe",selectedRecipe);
+        Log.v("jjj", "runnignIntentActivity");
+        final Intent intent = new Intent(this, MessageDetailActivity.class);
+        intent.putExtras(selectedRecipeBundle);
+        startActivity(intent);
 
 
 

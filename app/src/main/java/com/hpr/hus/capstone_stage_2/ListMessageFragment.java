@@ -38,6 +38,10 @@ public class ListMessageFragment extends Fragment implements RecyclerViewAdapter
         placeHolder.add("Message 3");
         placeHolder.add("Message 4");
         placeHolder.add("Message 5");
+        placeHolder.add("Message 6");
+        placeHolder.add("Message 7");
+        placeHolder.add("Message 8");
+        placeHolder.add("Message 9");
 
 
         // setting up RecyclerView

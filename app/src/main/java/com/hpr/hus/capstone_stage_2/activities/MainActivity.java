@@ -2,89 +2,48 @@ package com.hpr.hus.capstone_stage_2.activities;
 
 
 import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.hpr.hus.capstone_stage_2.R;
-import com.hpr.hus.capstone_stage_2.activities.MessageDetailActivity;
-import com.hpr.hus.capstone_stage_2.login.EmailPasswordActivity;
 import com.hpr.hus.capstone_stage_2.login.LoginActivity;
-import com.hpr.hus.capstone_stage_2.login.SignInActivity;
-import com.hpr.hus.capstone_stage_2.login.SignInActivityWithDrive;
+import com.hpr.hus.capstone_stage_2.login.LoginActivity3;
 import com.hpr.hus.capstone_stage_2.recycler.RecyclerViewAdapterList;
-
-import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements RecyclerViewAdapterList.ItemClickListener{
     RecyclerViewAdapterList adapter;
+    private FirebaseAnalytics mFirebaseAnalytics;
+    private StorageReference mStorageRef;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_3);
 
 
-/*
-        Bundle selectedRecipeBundle = new Bundle();
-        Log.v("hhh", "MainActivity   onCreate ");
-        final Intent intent = new Intent(this, LoginActivity.class);
-        intent.putExtras(selectedRecipeBundle);
-         startActivity(intent);*/
 
-       /* Bundle selectedRecipeBundle = new Bundle();
-        ArrayList<Integer> selectedRecipe = new ArrayList<>();
-        //  selectedRecipe.add(clickedItemIndex);
-        //  selectedRecipeBundle.putParcelableArrayList("Select_Recipe",selectedRecipe);
-        Log.v("jjj", "runnignIntentActivity");
-        final Intent intent = new Intent(this, MessageDetailActivity.class);
-        intent.putExtras(selectedRecipeBundle);
-        startActivity(intent);*/
+        // Obtain the FirebaseAnalytics instance.
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+
+        mStorageRef = FirebaseStorage.getInstance().getReference();
+
 
         Bundle selectedBundle = new Bundle();
         Log.v("hhh", "MainActivity   onCreate ");
-        final Intent intent = new Intent(this, LoginActivity.class);
+        final Intent intent = new Intent(this, LoginActivity3.class);
         intent.putExtras(selectedBundle);
         startActivity(intent);
 
-
-
-
-        /*MasterListFragment masterListFragment = new MasterListFragment();
-        FragmentManager fragmentManager = getSupportFragmentManager();
-
-        fragmentManager.beginTransaction()
-                .add(R.id.list_container,masterListFragment)
-                .commit();*/
-
-       /* // populate  RecyclerView
-        ArrayList<String> placeHolder = new ArrayList<>();
-        placeHolder.add("Message 1");
-        placeHolder.add("Message 2");
-        placeHolder.add("Message 3");
-        placeHolder.add("Message 4");
-        placeHolder.add("Message 5");
-
-        // setting up RecyclerView
-        RecyclerView recyclerView = findViewById(R.id.rvMessages);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new RecyclerViewAdapter(this, placeHolder);
-        adapter.setClickListener(this);
-        recyclerView.setAdapter(adapter);
-
-        // setup layoutManager
-
-        LinearLayoutManager  layoutManager = new LinearLayoutManager (this) {
-            @Override
-            public RecyclerView.LayoutParams generateDefaultLayoutParams() {
-                return null;
-            }
-        };
-
-        //Adding divider
-        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(),
-                layoutManager.getOrientation());
-        recyclerView.addItemDecoration(dividerItemDecoration);*/
 
 
 

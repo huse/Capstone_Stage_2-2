@@ -16,6 +16,8 @@
     <string name="signed_out">Signed out</string>
     <string name="title_text">Google Sign-In\nQuickstart</string>
     <string name="sign_out">Sign Out</string>
+    <string name="go_to_messages">Go to message screen</string>
+
     <string name="disconnect">Disconnect</string>
     <string name="signed_in_fmt">Signed in as: %s</string>
     <string name="server_client_id">943821402097-7ahevm8alvldk3b7opalup6h1b695ig4.apps.googleusercontent.com</string>
@@ -31,4 +33,16 @@
     <string name="loading">Loading…</string>
 
     <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
+
+
+
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+
+
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_settings">Settings</string>
 </resources>

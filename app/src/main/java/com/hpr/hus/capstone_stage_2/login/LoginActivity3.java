@@ -43,11 +43,13 @@ import java.util.List;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
+import com.firebase.client.Firebase;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserInfo;
 import com.google.firebase.auth.UserProfileChangeRequest;
 import com.hpr.hus.capstone_stage_2.activities.MessageDetailActivity;
 import com.hpr.hus.capstone_stage_2.R;
@@ -57,20 +59,25 @@ import butterknife.BindView;
 /**
  * A login screen that offers login via email/password.
  */
-public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> ,View.OnClickListener,NavigationView.OnNavigationItemSelectedListener{
+public class LoginActivity3 extends AppCompatActivity implements LoaderCallbacks<Cursor>, View.OnClickListener {
 
-    private static final String TAG = "hhh LoginActivity:";
+    private static final String TAG = "hhh LoginActivity3:";
+    private static final String FIREBASE_URL = "";
     private FirebaseAuth mAuth;
-
 
 
     //butterknife
 
-    @BindView(R.id.nav_sign_in)MenuView.ItemView signInNav;
-    @BindView(R.id.nav_create_account)MenuView.ItemView createAccountNav;
-    @BindView(R.id.nav_verify_email)MenuView.ItemView verifyEmailNav;
-    @BindView(R.id.nav_sign_out)MenuView.ItemView signOutNav;
-    @BindView(R.id.nav_go_to_messages)MenuView.ItemView goToMessageNav;
+    @BindView(R.id.nav_sign_in)
+    MenuView.ItemView signInNav;
+    @BindView(R.id.nav_create_account)
+    MenuView.ItemView createAccountNav;
+    @BindView(R.id.nav_verify_email)
+    MenuView.ItemView verifyEmailNav;
+    @BindView(R.id.nav_sign_out)
+    MenuView.ItemView signOutNav;
+    @BindView(R.id.nav_go_to_messages)
+    MenuView.ItemView goToMessageNav;
 
     /**
      * Id to identity READ_CONTACTS permission request.
@@ -87,7 +94,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
      */
-    private UserLoginTask mAuthTask = null;
+   // private UserLoginTask mAuthTask = null;
 
     // UI references.
     private AutoCompleteTextView mEmailView;
@@ -98,6 +105,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private TextView mDetailTextView;
 
     NavigationView navigationView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -117,8 +125,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         findViewById(R.id.go_to_messages_button).setOnClickListener(this);
 
 
-
-
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         populateAutoComplete();
@@ -128,9 +134,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
                 if (id == EditorInfo.IME_ACTION_DONE || id == EditorInfo.IME_NULL) {
-                    attemptLogin();
+
+                    Log.v("hhh" , "id=   " +id +"" );
+                   // attemptLogin();
                     return true;
                 }
+                Log.v("hhh" , "false id=   " +id +"" );
                 return false;
             }
         });
@@ -154,26 +163,27 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                         .setAction("Action", null).show();
             }
         });*/
-/*
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+
+        /*DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
-        toggle.syncState();
-
+        toggle.syncState();*/
+/*
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);*/
     }
 
-public void toastingMessage(){
-    Toast.makeText(LoginActivity.this, "This is for test.",
-            Toast.LENGTH_SHORT).show();
-}
+    public void toastingMessage() {
+        Toast.makeText(LoginActivity3.this, "This is for test.",
+                Toast.LENGTH_SHORT).show();
+    }
+
     private void updateUI(FirebaseUser user) {
 
         if (user != null) {
-             mStatusTextView.setText("Welcome  "+getString(R.string.google_status_fmt, user.getEmail(), user.isEmailVerified()));
-             mDetailTextView.setText(getString(R.string.firebase_status_fmt, user.getUid()));
+            mStatusTextView.setText("Welcome  " + getString(R.string.google_status_fmt, user.getEmail(), user.isEmailVerified()));
+            mDetailTextView.setText(getString(R.string.firebase_status_fmt, user.getUid()));
 
             findViewById(R.id.email_sign_in_button).setVisibility(View.GONE);
             findViewById(R.id.email_create_account_button).setVisibility(View.GONE);
@@ -181,36 +191,37 @@ public void toastingMessage(){
             findViewById(R.id.verify_email_button).setVisibility(View.VISIBLE);
             findViewById(R.id.go_to_messages_button).setVisibility(View.VISIBLE);
             findViewById(R.id.verify_email_button).setEnabled(!user.isEmailVerified());
-                if(user.isEmailVerified()){
-                    Log.v("hhh", "in singed in");
-                }
+            if (user.isEmailVerified()) {
+                Log.v("hhh", "in singed in");
+            }
 
 
-            navigationView.getMenu().findItem(R.id.nav_sign_in).setEnabled(false);
+            /*navigationView.getMenu().findItem(R.id.nav_sign_in).setEnabled(false);
             navigationView.getMenu().findItem(R.id.nav_create_account).setEnabled(!user.isEmailVerified());
             navigationView.getMenu().findItem(R.id.nav_verify_email).setEnabled(false);
             navigationView.getMenu().findItem(R.id.nav_sign_out).setEnabled(true);
-            navigationView.getMenu().findItem(R.id.nav_go_to_messages).setEnabled(true);
+            navigationView.getMenu().findItem(R.id.nav_go_to_messages).setEnabled(true);*/
 
         } else {
-              mStatusTextView.setText(R.string.signed_out);
-              mDetailTextView.setText(null);
+            mStatusTextView.setText(R.string.signed_out);
+            mDetailTextView.setText(null);
 
-           findViewById(R.id.email_sign_in_button).setVisibility(View.VISIBLE);
+            findViewById(R.id.email_sign_in_button).setVisibility(View.VISIBLE);
             findViewById(R.id.email_create_account_button).setVisibility(View.VISIBLE);
             findViewById(R.id.sign_out_button).setVisibility(View.GONE);
-             findViewById(R.id.verify_email_button).setVisibility(View.GONE);
+            findViewById(R.id.verify_email_button).setVisibility(View.GONE);
             findViewById(R.id.go_to_messages_button).setVisibility(View.GONE);
 
-            navigationView.getMenu().findItem(R.id.nav_sign_in).setEnabled(true);
+          /*  navigationView.getMenu().findItem(R.id.nav_sign_in).setEnabled(true);
             navigationView.getMenu().findItem(R.id.nav_create_account).setEnabled(false);
             navigationView.getMenu().findItem(R.id.nav_verify_email).setEnabled(true);
             navigationView.getMenu().findItem(R.id.nav_sign_out).setEnabled(false);
-            navigationView.getMenu().findItem(R.id.nav_go_to_messages).setEnabled(false);
+            navigationView.getMenu().findItem(R.id.nav_go_to_messages).setEnabled(false);*/
 
         }
     }
-    public boolean checkIfUserVerified(){
+
+    public boolean checkIfUserVerified() {
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         boolean emailVerified = false;
@@ -231,24 +242,24 @@ public void toastingMessage(){
         return emailVerified;
     }
 
-        public void  userUpdateProfile(){
-            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    public void userUpdateProfile() {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                    .setDisplayName("Jane Q. User")
-                    .setPhotoUri(Uri.parse("https://example.com/jane-q-user/profile.jpg"))
-                    .build();
+        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                .setDisplayName("Jane Q. User")
+                .setPhotoUri(Uri.parse("https://example.com/jane-q-user/profile.jpg"))
+                .build();
 
-            user.updateProfile(profileUpdates)
-                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if (task.isSuccessful()) {
-                                Log.d(TAG, "User profile updated.");
-                            }
+        user.updateProfile(profileUpdates)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Log.d(TAG, "User profile updated.");
                         }
-                    });
-        }
+                    }
+                });
+    }
 
     @Override
     public void onClick(View v) {
@@ -258,25 +269,21 @@ public void toastingMessage(){
         } else if (i == R.id.email_sign_in_button) {
             signIn(mEmailView.getText().toString(), mPasswordView.getText().toString());
 
-        } else if (i == R.id.sign_out_button) {Toast.makeText(LoginActivity.this, "sign_out_button",
-                Toast.LENGTH_SHORT).show();
-           // signOut();
+        } else if (i == R.id.sign_out_button) {
+            signOut();
         } else if (i == R.id.verify_email_button) {
             sendEmailVerification();
         } else if (i == R.id.go_to_messages_button) {
-            Toast.makeText(LoginActivity.this, "go_to_messages_button",
+            Toast.makeText(LoginActivity3.this, "go_to_messages_button",
                     Toast.LENGTH_SHORT).show();
-            runnignIntentActivity();
+            runnignIntentActivity(mAuth);
         } else if (i == R.id.nav_sign_in) {
-            Toast.makeText(LoginActivity.this, "nav_sign_in",
+            Toast.makeText(LoginActivity3.this, "nav_sign_in",
                     Toast.LENGTH_SHORT).show();
             signIn(mEmailView.getText().toString(), mPasswordView.getText().toString());
 
         }
     }
-
-
-
 
 
     // [START on_start_check_user]
@@ -306,13 +313,13 @@ public void toastingMessage(){
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            Toast.makeText(LoginActivity.this, "Authentication passed.",
+                            Toast.makeText(LoginActivity3.this, "Authentication passed.",
                                     Toast.LENGTH_SHORT).show();
                             updateUI(user);
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(LoginActivity.this, "Authentication failed." +  task.getException().toString(),
+                            Toast.makeText(LoginActivity3.this, "Authentication failed." + task.getException().toString(),
                                     Toast.LENGTH_SHORT).show();
                             updateUI(null);
                         }
@@ -324,6 +331,7 @@ public void toastingMessage(){
                 });
         // [END create_user_with_email]
     }
+
     private boolean validateForm() {
         boolean valid = true;
 
@@ -351,6 +359,7 @@ public void toastingMessage(){
             mProgressDialog.dismiss();
         }*/
     }
+
     public void showProgressDialog() {
         /*if (mProgressDialog == null) {
             mProgressDialog = new ProgressDialog(this);
@@ -378,11 +387,14 @@ public void toastingMessage(){
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
+
                             updateUI(user);
+                            getUserProfile(user);
+                            runnignIntentActivity(mAuth);
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithEmail:failure", task.getException());
-                            Toast.makeText(LoginActivity.this, "Authentication failed.",
+                            Toast.makeText(LoginActivity3.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
                             updateUI(null);
                         }
@@ -397,6 +409,7 @@ public void toastingMessage(){
                 });
         // [END sign_in_with_email]
     }
+
     private void signOut() {
         mAuth.signOut();
         updateUI(null);
@@ -418,12 +431,12 @@ public void toastingMessage(){
                         findViewById(R.id.verify_email_button).setEnabled(true);
 
                         if (task.isSuccessful()) {
-                            Toast.makeText(LoginActivity.this,
+                            Toast.makeText(LoginActivity3.this,
                                     "Verification email sent to " + user.getEmail(),
                                     Toast.LENGTH_SHORT).show();
                         } else {
                             Log.e(TAG, "sendEmailVerification", task.getException());
-                            Toast.makeText(LoginActivity.this,
+                            Toast.makeText(LoginActivity3.this,
                                     "Failed to send verification email.",
                                     Toast.LENGTH_SHORT).show();
                         }
@@ -433,18 +446,17 @@ public void toastingMessage(){
         // [END send_email_verification]
     }
 
-public void runnignIntentActivity(){
-    Bundle selecteUserBundle = new Bundle();
-    ArrayList<Integer> selectedUser = new ArrayList<>();
-    //  selectedUser.add(clickedItemIndex);
-    //  selecteUserBundle.putParcelableArrayList("Select_Recipe",selectedUser);
+    public void runnignIntentActivity(FirebaseAuth mAuth) {
+        Bundle selectedRecipeBundle = new Bundle();
+        ArrayList<Integer> selectedRecipe = new ArrayList<>();
+        //  selectedRecipe.add(clickedItemIndex);
+        //  selectedRecipeBundle.putParcelableArrayList("Select_Recipe",selectedRecipe);
+        Log.v("jjj", "runnignIntentActivity");
+        final Intent intent = new Intent(this, MessageDetailActivity.class);
+        intent.putExtras(selectedRecipeBundle);
+        startActivity(intent);
+    }
 
-
-    Log.v("jjj", "runnignIntentActivity");
-    final Intent intent = new Intent(this, MessageDetailActivity.class);
-    intent.putExtras(selecteUserBundle);
-    startActivity(intent);
-}
     private void populateAutoComplete() {
         if (!mayRequestContacts()) {
             return;
@@ -489,57 +501,6 @@ public void runnignIntentActivity(){
     }
 
 
-    /**
-     * Attempts to sign in or register the account specified by the login form.
-     * If there are form errors (invalid email, missing fields, etc.), the
-     * errors are presented and no actual login attempt is made.
-     */
-    private void attemptLogin() {
-        if (mAuthTask != null) {
-            return;
-        }
-
-        // Reset errors.
-        mEmailView.setError(null);
-        mPasswordView.setError(null);
-
-        // Store values at the time of the login attempt.
-        String email = mEmailView.getText().toString();
-        String password = mPasswordView.getText().toString();
-
-        boolean cancel = false;
-        View focusView = null;
-
-        // Check for a valid password, if the user entered one.
-        if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
-            mPasswordView.setError(getString(R.string.error_invalid_password));
-            focusView = mPasswordView;
-            cancel = true;
-        }
-
-        // Check for a valid email address.
-        if (TextUtils.isEmpty(email)) {
-            mEmailView.setError(getString(R.string.error_field_required));
-            focusView = mEmailView;
-            cancel = true;
-        } else if (!isEmailValid(email)) {
-            mEmailView.setError(getString(R.string.error_invalid_email));
-            focusView = mEmailView;
-            cancel = true;
-        }
-
-        if (cancel) {
-            // There was an error; don't attempt login and focus the first
-            // form field with an error.
-            focusView.requestFocus();
-        } else {
-            // Show a progress spinner, and kick off a background task to
-            // perform the user login attempt.
-            showProgress(true);
-            mAuthTask = new UserLoginTask(email, password);
-            mAuthTask.execute((Void) null);
-        }
-    }
 
     private boolean isEmailValid(String email) {
         //TODO: Replace this with your own logic
@@ -624,11 +585,12 @@ public void runnignIntentActivity(){
     private void addEmailsToAutoComplete(List<String> emailAddressCollection) {
         //Create adapter to tell the AutoCompleteTextView what to show in its dropdown list.
         ArrayAdapter<String> adapter =
-                new ArrayAdapter<>(LoginActivity.this,
+                new ArrayAdapter<>(LoginActivity3.this,
                         android.R.layout.simple_dropdown_item_1line, emailAddressCollection);
 
         mEmailView.setAdapter(adapter);
     }
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -655,55 +617,59 @@ public void runnignIntentActivity(){
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+
+
             return true;
         }
+        if (id == R.id.action_sign_out) {
 
+
+            return true;
+        }
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
+/*    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
-        Toast.makeText(LoginActivity.this, "getItemId  fff",
+        Toast.makeText(LoginActivity3.this, "getItemId  fff",
                 Toast.LENGTH_SHORT).show();
         int id = item.getItemId();
-        Toast.makeText(LoginActivity.this, "getItemId  " +id,
+        Toast.makeText(LoginActivity3.this, "getItemId  " + id,
                 Toast.LENGTH_SHORT).show();
         if (id == R.id.nav_sign_in) {
-            Toast.makeText(LoginActivity.this, "nav_sign_in",
+            Toast.makeText(LoginActivity3.this, "nav_sign_in",
                     Toast.LENGTH_SHORT).show();
             signIn(mEmailView.getText().toString(), mPasswordView.getText().toString());
 
         } else if (id == R.id.nav_create_account) {
-            Toast.makeText(LoginActivity.this, "nav_create_account",
+            Toast.makeText(LoginActivity3.this, "nav_create_account",
                     Toast.LENGTH_SHORT).show();
             createAccount(mEmailView.getText().toString(), mPasswordView.getText().toString());
         } else if (id == R.id.nav_verify_email) {
-            Toast.makeText(LoginActivity.this, "nav_verify_email",
+            Toast.makeText(LoginActivity3.this, "nav_verify_email",
                     Toast.LENGTH_SHORT).show();
             sendEmailVerification();
         } else if (id == R.id.nav_sign_out) {
-            Toast.makeText(LoginActivity.this, "nav_sign_out",
+            Toast.makeText(LoginActivity3.this, "nav_sign_out",
                     Toast.LENGTH_SHORT).show();
             signOut();
         } else if (id == R.id.nav_go_to_messages) {
-            Toast.makeText(LoginActivity.this, "nav_go_to_messages",
+            Toast.makeText(LoginActivity3.this, "nav_go_to_messages",
                     Toast.LENGTH_SHORT).show();
-            attemptLogin();
+           // attemptLogin();
         } else if (id == R.id.nav_Setting) {
-            Toast.makeText(LoginActivity.this, "nav_Setting",
+            Toast.makeText(LoginActivity3.this, "nav_Setting",
                     Toast.LENGTH_SHORT).show();
 
         }
-
-
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
+    }*/
 
 
     private interface ProfileQuery {
@@ -716,67 +682,25 @@ public void runnignIntentActivity(){
         int IS_PRIMARY = 1;
     }
 
-    /**
-     * Represents an asynchronous login/registration task used to authenticate
-     * the user.
-     */
-    public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
 
-        private final String mEmail;
-        private final String mPassword;
+    public static void getUserProfile(FirebaseUser user){
 
-        UserLoginTask(String email, String password) {
-            mEmail = email;
-            mPassword = password;
+        if (user != null) {
+            for (UserInfo profile : user.getProviderData()) {
+                // Id of the provider (ex: google.com)
+                String providerId = profile.getProviderId();
 
-        }
+                // UID specific to the provider
+                String uid = profile.getUid();
 
-        @Override
-        protected Boolean doInBackground(Void... params) {
-            // TODO: attempt authentication against a network service.
+                // Name, email address, and profile photo Url
+                String name = profile.getDisplayName();
+                String email = profile.getEmail();
+                Uri photoUrl = profile.getPhotoUrl();
 
-            try {
-                // Simulate network access.
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                return false;
+                Log.v("hhh" , "user info"  + name + email + photoUrl  );
             }
 
-            for (String credential : DUMMY_CREDENTIALS) {
-                String[] pieces = credential.split(":");
-                if (pieces[0].equals(mEmail)) {
-                    // Account exists, return true if the password matches.
-                    return pieces[1].equals(mPassword);
-                }
-            }
-
-            // TODO: register the new account here.
-            createAccount(mEmail,mPassword);
-            return true;
-        }
-
-        @Override
-        protected void onPostExecute(final Boolean success) {
-            mAuthTask = null;
-            showProgress(false);
-
-            if (success) {
-
-
-                runnignIntentActivity();
-
-
-               // finish();
-            } else {
-                mPasswordView.setError(getString(R.string.error_incorrect_password));
-                mPasswordView.requestFocus();
-            }
-        }
-
-        @Override
-        protected void onCancelled() {
-            mAuthTask = null;
-            showProgress(false);
         }
 
     }

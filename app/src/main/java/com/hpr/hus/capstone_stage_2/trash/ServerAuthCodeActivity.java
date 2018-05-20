@@ -1,4 +1,4 @@
-package com.hpr.hus.capstone_stage_2.login;
+package com.hpr.hus.capstone_stage_2.trash;
 
 import android.content.Intent;
 import android.os.Bundle;

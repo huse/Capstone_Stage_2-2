@@ -1,4 +1,4 @@
-package com.hpr.hus.capstone_stage_2.login;
+package com.hpr.hus.capstone_stage_2.trash;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,26 +13,23 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.common.Scopes;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.common.api.Scope;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.hpr.hus.capstone_stage_2.R;
 
 /**
  * Activity to demonstrate basic retrieval of the Google user's ID, email address, and basic
- * profile, which also adds a request dialog to access the user's Google Drive.
+ * profile.
  */
-public class SignInActivityWithDrive extends AppCompatActivity implements
+public class SignInActivity extends AppCompatActivity implements
         View.OnClickListener {
 
     private static final String TAG = "SignInActivity";
     private static final int RC_SIGN_IN = 9001;
 
     private GoogleSignInClient mGoogleSignInClient;
-
     private TextView mStatusTextView;
 
     @Override
@@ -52,22 +49,20 @@ public class SignInActivityWithDrive extends AppCompatActivity implements
         // Configure sign-in to request the user's ID, email address, and basic
         // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestScopes(new Scope(Scopes.DRIVE_APPFOLDER))
                 .requestEmail()
                 .build();
         // [END configure_signin]
 
         // [START build_client]
-        // Build a GoogleSignInClient with access to the Google Sign-In API and the
-        // options specified by gso.
+        // Build a GoogleSignInClient with the options specified by gso.
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
         // [END build_client]
 
         // [START customize_button]
-        // Customize sign-in button. The sign-in button can be displayed in
-        // multiple sizes.
+        // Set the dimensions of the sign-in button.
         SignInButton signInButton = findViewById(R.id.sign_in_button);
         signInButton.setSize(SignInButton.SIZE_STANDARD);
+        signInButton.setColorScheme(SignInButton.COLOR_LIGHT);
         // [END customize_button]
     }
 
@@ -75,13 +70,12 @@ public class SignInActivityWithDrive extends AppCompatActivity implements
     public void onStart() {
         super.onStart();
 
-        // Check if the user is already signed in and all required scopes are granted
+        // [START on_start_sign_in]
+        // Check for existing Google Sign In account, if the user is already signed in
+        // the GoogleSignInAccount will be non-null.
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
-        if (account != null && GoogleSignIn.hasPermissions(account, new Scope(Scopes.DRIVE_APPFOLDER))) {
-            updateUI(account);
-        } else {
-            updateUI(null);
-        }
+        updateUI(account);
+        // [END on_start_sign_in]
     }
 
     // [START onActivityResult]
@@ -89,8 +83,10 @@ public class SignInActivityWithDrive extends AppCompatActivity implements
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
+        // Result returned from launching the Intent from GoogleSignInClient.getSignInIntent(...);
         if (requestCode == RC_SIGN_IN) {
+            // The Task returned from this call is always completed, no need to attach
+            // a listener.
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             handleSignInResult(task);
         }
@@ -98,16 +94,16 @@ public class SignInActivityWithDrive extends AppCompatActivity implements
     // [END onActivityResult]
 
     // [START handleSignInResult]
-    private void handleSignInResult(@Nullable Task<GoogleSignInAccount> completedTask) {
-        Log.d(TAG, "handleSignInResult:" + completedTask.isSuccessful());
-
+    private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
         try {
-            // Signed in successfully, show authenticated U
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
+
+            // Signed in successfully, show authenticated UI.
             updateUI(account);
         } catch (ApiException e) {
-            // Signed out, show unauthenticated UI.
-            Log.w(TAG, "handleSignInResult:error", e);
+            // The ApiException status code indicates the detailed failure reason.
+            // Please refer to the GoogleSignInStatusCodes class reference for more information.
+            Log.w(TAG, "signInResult:failed code=" + e.getStatusCode());
             updateUI(null);
         }
     }
@@ -122,21 +118,22 @@ public class SignInActivityWithDrive extends AppCompatActivity implements
 
     // [START signOut]
     private void signOut() {
-        mGoogleSignInClient.signOut().addOnCompleteListener(this, new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                // [START_EXCLUDE]
-                updateUI(null);
-                // [END_EXCLUDE]
-            }
-        });
+        mGoogleSignInClient.signOut()
+                .addOnCompleteListener(this, new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        // [START_EXCLUDE]
+                        updateUI(null);
+                        // [END_EXCLUDE]
+                    }
+                });
     }
     // [END signOut]
 
     // [START revokeAccess]
     private void revokeAccess() {
-        mGoogleSignInClient.revokeAccess().addOnCompleteListener(this,
-                new OnCompleteListener<Void>() {
+        mGoogleSignInClient.revokeAccess()
+                .addOnCompleteListener(this, new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         // [START_EXCLUDE]
@@ -175,4 +172,4 @@ public class SignInActivityWithDrive extends AppCompatActivity implements
                 break;
         }
     }
-}
+ }

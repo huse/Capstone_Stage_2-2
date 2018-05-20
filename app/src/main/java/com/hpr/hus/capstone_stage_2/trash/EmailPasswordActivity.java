@@ -1,6 +1,5 @@
-package com.hpr.hus.capstone_stage_2.login;
+package com.hpr.hus.capstone_stage_2.trash;
 
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
@@ -17,7 +16,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.hpr.hus.capstone_stage_2.R;
 
-public class EmailPasswordActivity extends BaseActivity implements
+public class EmailPasswordActivity{ /*extends BaseActivity implements
         View.OnClickListener {
 
     private static final String TAG = "EmailPassword";
@@ -228,4 +227,6 @@ public class EmailPasswordActivity extends BaseActivity implements
             sendEmailVerification();
         }
     }
+}
+*/
 }

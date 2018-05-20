@@ -1,4 +1,4 @@
-package com.hpr.hus.capstone_stage_2.login;
+package com.hpr.hus.capstone_stage_2.trash;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -30,11 +30,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.hpr.hus.capstone_stage_2.R;
 import com.hpr.hus.capstone_stage_2.activities.MessageDetailActivity;
 

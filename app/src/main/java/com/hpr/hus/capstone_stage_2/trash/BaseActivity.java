@@ -1,4 +1,4 @@
-package com.hpr.hus.capstone_stage_2.login;
+package com.hpr.hus.capstone_stage_2.trash;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -7,9 +7,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import com.hpr.hus.capstone_stage_2.R;
-public class BaseActivity extends AppCompatActivity {
-
-    @VisibleForTesting
+public class BaseActivity// extends AppCompatActivity {
+{
+   /* @VisibleForTesting
     public ProgressDialog mProgressDialog;
 
     public void showProgressDialog() {
@@ -40,6 +40,6 @@ public class BaseActivity extends AppCompatActivity {
         super.onStop();
         hideProgressDialog();
     }
-
+*/
 }
 

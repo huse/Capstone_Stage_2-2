@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
@@ -16,6 +17,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 
 import com.firebase.client.Firebase;
 import com.google.firebase.auth.FirebaseAuth;
@@ -36,6 +38,7 @@ public class MessageDetailActivity extends AppCompatActivity implements  Navigat
     static String STEP_STACK_DETAIL="Step_Stack_detail";
     FirebaseUser mFirebaseRef;
     NavigationView navigationView;
+    private String userEmail= "Welcome    ";
 
     private DatabaseReference userDatabase;
     @Override
@@ -50,6 +53,7 @@ public class MessageDetailActivity extends AppCompatActivity implements  Navigat
 
 
          mFirebaseRef = FirebaseAuth.getInstance().getCurrentUser();
+        userEmail = userEmail + mFirebaseRef.getEmail();
 
 
         if (mFirebaseRef != null) {
@@ -66,9 +70,9 @@ public class MessageDetailActivity extends AppCompatActivity implements  Navigat
                 String email = profile.getEmail();
                 Uri photoUrl = profile.getPhotoUrl();
 
+
                 Log.v("hhh Message" , "\nuser name: "  + name +"\nuser email: "  + email +"\nuser photoUrl: "  + photoUrl  );
             }
-
         }
         String userId = getIntent().getStringExtra("user_id");
         userDatabase = FirebaseDatabase.getInstance().getReference();
@@ -134,6 +138,8 @@ public class MessageDetailActivity extends AppCompatActivity implements  Navigat
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
+        menu.findItem(R.id.welcome).setTitle(userEmail);
+
         return true;
     }
 }

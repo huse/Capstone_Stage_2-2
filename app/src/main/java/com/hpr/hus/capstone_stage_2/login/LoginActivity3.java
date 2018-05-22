@@ -51,6 +51,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserInfo;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.hpr.hus.capstone_stage_2.activities.MessageActivity;
 import com.hpr.hus.capstone_stage_2.activities.MessageDetailActivity;
 import com.hpr.hus.capstone_stage_2.R;
 
@@ -64,7 +65,7 @@ public class LoginActivity3 extends AppCompatActivity implements LoaderCallbacks
     private static final String TAG = "hhh LoginActivity3:";
     private static final String FIREBASE_URL = "";
     private FirebaseAuth mAuth;
-
+private String userEmail= "Welcome    ";
 
     //butterknife
 
@@ -265,6 +266,8 @@ public class LoginActivity3 extends AppCompatActivity implements LoaderCallbacks
     public void onClick(View v) {
         int i = v.getId();
         if (i == R.id.email_create_account_button) {
+            Toast.makeText(LoginActivity3.this, "email_create_account_button  pressed",
+                    Toast.LENGTH_SHORT).show();
             createAccount(mEmailView.getText().toString(), mPasswordView.getText().toString());
         } else if (i == R.id.email_sign_in_button) {
             signIn(mEmailView.getText().toString(), mPasswordView.getText().toString());
@@ -299,16 +302,21 @@ public class LoginActivity3 extends AppCompatActivity implements LoaderCallbacks
     private void createAccount(String email, String password) {
         Log.d(TAG, "createAccount:" + email);
         if (!validateForm()) {
+            Log.d(TAG, "createAccount:  !validateForm()" + email);
             return;
         }
 
         showProgressDialog();
+        Log.d(TAG, "createAccount  2 :" + email);
 
         // [START create_user_with_email]
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
+                        Log.d(TAG, "createAccount  3 :" + "inside onComplete");
+
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "createUserWithEmail:success");
@@ -316,6 +324,7 @@ public class LoginActivity3 extends AppCompatActivity implements LoaderCallbacks
                             Toast.makeText(LoginActivity3.this, "Authentication passed.",
                                     Toast.LENGTH_SHORT).show();
                             updateUI(user);
+                            userEmail = userEmail + user.getEmail();
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
@@ -330,6 +339,7 @@ public class LoginActivity3 extends AppCompatActivity implements LoaderCallbacks
                     }
                 });
         // [END create_user_with_email]
+
     }
 
     private boolean validateForm() {
@@ -410,7 +420,7 @@ public class LoginActivity3 extends AppCompatActivity implements LoaderCallbacks
         // [END sign_in_with_email]
     }
 
-    private void signOut() {
+    public void signOut() {
         mAuth.signOut();
         updateUI(null);
     }
@@ -452,7 +462,7 @@ public class LoginActivity3 extends AppCompatActivity implements LoaderCallbacks
         //  selectedRecipe.add(clickedItemIndex);
         //  selectedRecipeBundle.putParcelableArrayList("Select_Recipe",selectedRecipe);
         Log.v("jjj", "runnignIntentActivity");
-        final Intent intent = new Intent(this, MessageDetailActivity.class);
+        final Intent intent = new Intent(this, MessageActivity.class);
         intent.putExtras(selectedRecipeBundle);
         startActivity(intent);
     }
@@ -605,6 +615,8 @@ public class LoginActivity3 extends AppCompatActivity implements LoaderCallbacks
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
+        menu.add("user");
+        menu.findItem(R.id.welcome).setTitle(userEmail);
         return true;
     }
 
@@ -622,8 +634,7 @@ public class LoginActivity3 extends AppCompatActivity implements LoaderCallbacks
             return true;
         }
         if (id == R.id.action_sign_out) {
-
-
+            signOut();
             return true;
         }
         return super.onOptionsItemSelected(item);

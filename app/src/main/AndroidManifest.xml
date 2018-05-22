@@ -23,7 +23,7 @@
 
         <activity android:name=".trash.SignInActivity" />
         <activity android:name=".trash.SignInActivityWithDrive" />
-        <activity android:name=".trash.EmailPasswordActivity" />
+        <activity android:name=".activities.MessageActivity" />
 
         <service android:name=".messaging.MyFirebaseInstanceIDService">
             <intent-filter>

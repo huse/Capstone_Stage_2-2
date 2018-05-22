@@ -24,7 +24,7 @@ import com.hpr.hus.capstone_stage_2.R;
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
     public MyFirebaseMessagingService() {
     }
-    private static final String TAG = "MyService";
+    private static final String TAG = "hhh MyService";
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {

@@ -1,0 +1,59 @@
+{
+  "project_info": {
+    "project_number": "229081668490",
+    "firebase_url": "https://messagingapp-4b6cd.firebaseio.com",
+    "project_id": "messagingapp-4b6cd",
+    "storage_bucket": "messagingapp-4b6cd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:229081668490:android:efb3f1b365ff0cd9",
+        "android_client_info": {
+          "package_name": "com.hpr.hus.capstone_stage_2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "229081668490-uljejbqk2nvens2k2t57v3l0ak6q69b3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.hpr.hus.capstone_stage_2",
+            "certificate_hash": "c66af4d06ac9436985066a02e8d962cbbb7cadbf"
+          }
+        },
+        {
+          "client_id": "229081668490-vb84sobfcnr842p8nohl8q76f7p7v3na.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "229081668490-vb84sobfcnr842p8nohl8q76f7p7v3na.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBvgp0SoJqx0THxu2Gjoy9QcA_l4p7VqdA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "229081668490-vb84sobfcnr842p8nohl8q76f7p7v3na.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

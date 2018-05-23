@@ -9,7 +9,7 @@ import java.util.List;
 import com.hpr.hus.capstone_stage_2.R;
 
 public class WidgetService extends RemoteViewsService {
-    List<String> ingredientList;
+    List<String> messagesList;
     @Override
     public RemoteViewsFactory onGetViewFactory(Intent intent) {
         return new GridWidgetView(this.getApplicationContext(),intent);
@@ -33,14 +33,14 @@ public class WidgetService extends RemoteViewsService {
         }
         @Override
         public void onDataSetChanged() {
-            ingredientList = WidgetProvider.ingredientsList;
+            messagesList = WidgetProvider.messagesListInProvider;
         }
         @Override
         public void onDestroy() {
         }
         @Override
         public int getCount() {
-            return ingredientList.size();
+            return messagesList.size();
         }
         @Override
         public RemoteViews getLoadingView() {
@@ -53,7 +53,7 @@ public class WidgetService extends RemoteViewsService {
         @Override
         public RemoteViews getViewAt(int position) {
             RemoteViews view = new RemoteViews(mContext.getPackageName(), R.layout.widget_itmes);
-            view.setTextViewText(R.id.widget_text_view, ingredientList.get(position));
+            view.setTextViewText(R.id.widget_text_view, messagesList.get(position));
             Intent fillInIntent = new Intent();
             view.setOnClickFillInIntent(R.id.widget_text_view, fillInIntent);
             return view;

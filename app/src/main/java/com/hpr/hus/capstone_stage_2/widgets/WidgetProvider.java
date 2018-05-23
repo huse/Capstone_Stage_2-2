@@ -6,7 +6,6 @@ import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Message;
 import android.widget.RemoteViews;
 
 import java.util.ArrayList;
@@ -15,7 +14,7 @@ import com.hpr.hus.capstone_stage_2.activities.MessageActivity;
 
 public class WidgetProvider extends AppWidgetProvider {
     public static String INGREDIENT_LIST ="INGREDIENT_LIST";
-    static ArrayList<String> ingredientsList = new ArrayList<>();
+    static ArrayList<String> messagesListInProvider = new ArrayList<>();
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager, int appWidgetId) {
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget);
         Intent appIntent = new Intent(context, MessageActivity.class);
@@ -48,7 +47,7 @@ public class WidgetProvider extends AppWidgetProvider {
         int[] WidgetId = appWidgetManager.getAppWidgetIds(new ComponentName(context, WidgetProvider.class));
         String intentAction = intent.getAction();
         if (intentAction.equals("android.appwidget.action.APPWIDGET_UPDATE2")) {
-            ingredientsList = intent.getExtras().getStringArrayList(INGREDIENT_LIST);
+            messagesListInProvider = intent.getExtras().getStringArrayList(INGREDIENT_LIST);
             appWidgetManager.notifyAppWidgetViewDataChanged(WidgetId, R.id.grid_widget);
             WidgetProvider.updatingWidgets(context, appWidgetManager, WidgetId);
             super.onReceive(context, intent);

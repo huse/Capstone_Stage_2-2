@@ -1,6 +1,5 @@
 package com.hpr.hus.capstone_stage_2.activities;
 
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
@@ -12,7 +11,6 @@ import android.support.v7.widget.Toolbar;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -29,16 +27,13 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.FirebaseDatabase;
 import com.hpr.hus.capstone_stage_2.R;
-import com.hpr.hus.capstone_stage_2.login.LoginActivity;
 import com.hpr.hus.capstone_stage_2.messaging.GetSetMessage;
 import com.hpr.hus.capstone_stage_2.widgets.WidgetIntentService;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -50,6 +45,7 @@ public class MessageActivity extends AppCompatActivity implements View.OnClickLi
     ImageView userImage;
     private String userEmail = "Welcome    ";
     FirebaseUser mFirebaseRef;
+    ArrayList<String> messagesForWidgets;
 
 
     private FirebaseListAdapter<GetSetMessage> firebaseListAdapter;
@@ -69,11 +65,28 @@ public class MessageActivity extends AppCompatActivity implements View.OnClickLi
         mFirebaseRef = FirebaseAuth.getInstance().getCurrentUser();
 
         userEmail = userEmail + mFirebaseRef.getEmail();
+        messagesForWidgets= new ArrayList<>();
+        Log.v(TAG,"messagesForWidget   "+ messagesForWidgets  );
 
-        displayChatMessages();
+        displayListOfMessages();
+
+        Log.v(TAG,"messagesForWidget   after displayListOfMessages  "+ messagesForWidgets  );
 
 
+        for (String s : messagesForWidgets){
 
+                    Log.v(TAG,"messagesForWidget   "+ s  );
+                }
+
+
+        Log.v(TAG,"after counter   " + counter );
+        Log.v(TAG,"after counter2   " + counter2 );
+
+
+       //   WidgetIntentService.startWidget(MessageActivity.this,messagesForWidgets);
+        listOfMessages.setAdapter(firebaseListAdapter);
+        //listOfMessages.setSelection(listOfMessages.getAdapter().getCount()-1);
+        listOfMessages.scrollTo(0,listOfMessages.getAdapter().getCount()-1);
 
     }
 
@@ -111,14 +124,17 @@ public class MessageActivity extends AppCompatActivity implements View.OnClickLi
         // Clear the input
         input.setText("");
     }
+int counter =0;
+    int counter2 =0;
+private ArrayList<String> getMessagesForWidgets(ArrayList<String> list){
 
-
-    private void displayChatMessages() {
+    return list;
+}
+    private ArrayList<String> displayListOfMessages() {
 
         firebaseListAdapter = new FirebaseListAdapter<GetSetMessage>(this, GetSetMessage.class,
                 R.layout.messageformat, FirebaseDatabase.getInstance().getReference()) {
 
-            ArrayList<String> messagesForWidgets;
             @Override
             protected void populateView(View v, GetSetMessage model, int position) {
                 TextView messageContent =  v.findViewById(R.id.message_content);
@@ -137,34 +153,11 @@ public class MessageActivity extends AppCompatActivity implements View.OnClickLi
 
 //listOfMessages
 
-                messagesForWidgets= new ArrayList<>();
+               // messagesForWidgets= new ArrayList<>();
                 messagesForWidgets.add(model.getMessageText()+"\n"+
                         "User: "+model.getEmailUser()+"\n"+
                         "Time: "+DateFormat.format("HH:mm:ss MM-dd-yy ",
                         model.getMessageTime())+"\n");
-
-
-        /*if (MessageActivity.recipeArrayList!=null&& MessageActivity.recipeArrayList.size()!=0) {
-            List<ParsingIngredient> ingredients = MessageActivity.recipeArrayList.get(0).getIngredients();
-            nameOfRecipe = MessageActivity.recipeArrayList.get(0).getName();
-            int counter = 0;
-
-            for (ParsingIngredient i : firebaseListAdapter) {
-                counter++;
-
-                messagesForWidgets.add(i.getIngredient()+"\n"+
-                        "Quantity: "+i.getQuantity().toString()+"\n"+
-                        "Measure: "+i.getMeasure()+"\n");
-            }
-        }*/
-
-
-
-                /*for (String s : messagesForWidgets){
-
-                    Log.v(TAG,"messagesForWidget   "+ s  );
-                }*/
-
 
 
 
@@ -180,10 +173,9 @@ public class MessageActivity extends AppCompatActivity implements View.OnClickLi
             }
         };
 
-        listOfMessages.setAdapter(firebaseListAdapter);
-        //listOfMessages.setSelection(listOfMessages.getAdapter().getCount()-1);
-        listOfMessages.scrollTo(0,listOfMessages.getAdapter().getCount()-1);
+        Log.v(TAG,"End of Method"  );
 
+        return messagesForWidgets;
     }
 
     public void updateProfile(String userUriString) {

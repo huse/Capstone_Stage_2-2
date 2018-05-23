@@ -148,7 +148,7 @@ public class ContentMessageFragment  extends Fragment implements RecyclerViewAda
                         .getCurrentUser()
                         .getEmail(),FirebaseAuth.getInstance()
                         .getCurrentUser()
-                        .getPhotoUrl())
+                        .getPhotoUrl().toString())
                 );
 
         // Clear the input

@@ -1,0 +1,27 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:textAlignment="viewStart"
+
+    android:background="@drawable/widget_icon"
+
+    android:gravity="start">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:contentDescription="Waiting for loading information"
+        android:text="Waiting for loading information"
+        android:textColor="#0000ff"
+        android:textSize="12sp"
+        android:fillViewport="false"
+        android:textStyle="bold"
+        android:layout_alignParentRight="false"
+        android:layout_alignParentBottom="false"
+        android:layout_centerInParent="false"
+        android:layout_centerHorizontal="false"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="false"
+        android:layout_alignParentTop="false"/>
+
+</RelativeLayout>

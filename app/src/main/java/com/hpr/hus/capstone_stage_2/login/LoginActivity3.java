@@ -192,6 +192,8 @@ private String userEmail= "Welcome    ";
             findViewById(R.id.verify_email_button).setVisibility(View.VISIBLE);
             findViewById(R.id.go_to_messages_button).setVisibility(View.VISIBLE);
             findViewById(R.id.verify_email_button).setEnabled(!user.isEmailVerified());
+            findViewById(R.id.go_to_messages_button).setEnabled(user.isEmailVerified());
+
             if (user.isEmailVerified()) {
                 Log.v("hhh", "in singed in");
             }
@@ -400,7 +402,7 @@ private String userEmail= "Welcome    ";
 
                             updateUI(user);
                             getUserProfile(user);
-                            runnignIntentActivity(mAuth);
+                            //runnignIntentActivity(mAuth);
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithEmail:failure", task.getException());
@@ -444,6 +446,10 @@ private String userEmail= "Welcome    ";
                             Toast.makeText(LoginActivity3.this,
                                     "Verification email sent to " + user.getEmail(),
                                     Toast.LENGTH_SHORT).show();
+                            findViewById(R.id.verify_email_button).setEnabled(false);
+                            //findViewById(R.id.go_to_messages_button).setEnabled(false);
+
+
                         } else {
                             Log.e(TAG, "sendEmailVerification", task.getException());
                             Toast.makeText(LoginActivity3.this,
@@ -456,7 +462,10 @@ private String userEmail= "Welcome    ";
         // [END send_email_verification]
     }
 
-    public void runnignIntentActivity(FirebaseAuth mAuth) {
+    public void runnignIntentActivity(FirebaseAuth mAuthl) {
+        Log.v("jjj", "runnignIntentActivity   " + mAuthl.getCurrentUser().getEmail());
+
+       // if(mAuthl.isSignInWithEmailLink(mAuthl.getCurrentUser().getEmail())){
         Bundle selectedRecipeBundle = new Bundle();
         ArrayList<Integer> selectedRecipe = new ArrayList<>();
         //  selectedRecipe.add(clickedItemIndex);
@@ -465,6 +474,8 @@ private String userEmail= "Welcome    ";
         final Intent intent = new Intent(this, MessageActivity.class);
         intent.putExtras(selectedRecipeBundle);
         startActivity(intent);
+
+    //}
     }
 
     private void populateAutoComplete() {
@@ -615,7 +626,7 @@ private String userEmail= "Welcome    ";
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
-        menu.add("user");
+        //menu.add("user");
         menu.findItem(R.id.welcome).setTitle(userEmail);
         return true;
     }
@@ -628,11 +639,11 @@ private String userEmail= "Welcome    ";
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        /*if (id == R.id.action_settings) {
 
 
             return true;
-        }
+        }*/
         if (id == R.id.action_sign_out) {
             signOut();
             return true;

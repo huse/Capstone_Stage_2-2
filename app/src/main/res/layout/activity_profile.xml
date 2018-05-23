@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <include
+        layout="@layout/app_bar_main"
+        android:id="@+id/my_toolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
+
+    <EditText
+        android:id="@+id/username_text_view"
+        android:layout_width="328dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="64dp"
+        android:hint="Display name"
+        android:text="User name"
+        app:layout_constraintTop_toBottomOf="@id/my_toolbar"
+        tools:layout_editor_absoluteX="28dp" />
+
+    <EditText
+        android:id="@+id/picture_url"
+        android:layout_width="331dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginLeft="64dp"
+
+        android:hint="User picture URL"
+        android:text="Picture URL"
+        app:layout_constraintTop_toBottomOf="@id/username_text_view"
+
+        tools:layout_editor_absoluteX="27dp" />
+
+    <Button
+        android:id="@+id/update_profile"
+        android:layout_width="160dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="68dp"
+        android:padding="20dp"
+        android:text="Update profile"
+        app:layout_constraintTop_toBottomOf="@id/picture_url"
+        tools:layout_editor_absoluteX="145dp" />
+
+
+
+
+
+</android.support.constraint.ConstraintLayout>

@@ -9,10 +9,10 @@ public class GetSetMessage {
     private String messageText;
     private String messageUser;
     private String emailUser;
-    private Uri uriPhoto;
+    private String uriPhoto;
     private long messageTime;
 
-    public GetSetMessage(String messageText, String messageUser, String emailUser, Uri uriPhoto) {
+    public GetSetMessage(String messageText, String messageUser, String emailUser, String uriPhoto) {
         this.messageText = messageText;
         this.messageUser = messageUser;
         this.emailUser = emailUser;
@@ -41,7 +41,7 @@ public class GetSetMessage {
     public String getMessageUser() {
         return messageUser;
     }
-    public Uri getUriPhoto() {
+    public String getUriPhoto() {
         return uriPhoto;
     }
 

@@ -1,9 +1,9 @@
 package com.hpr.hus.capstone_stage_2.retrievingdata;
 
-public class RetrieveData {
+ class RetrieveData {
 
 
-    public static class Post {
+     static class Post {
 
         public String author;
         public String title;

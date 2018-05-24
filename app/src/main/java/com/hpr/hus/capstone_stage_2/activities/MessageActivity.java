@@ -40,11 +40,11 @@ import javax.net.ssl.HttpsURLConnection;
 public class MessageActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static final String TAG = "hhh MessageActivity";
-    ImageButton sendingButton;
-    ListView listOfMessages;
-    ImageView userImage;
-    FirebaseUser mFirebaseRef;
-    ArrayList<String> messagesForWidgets;
+    private ImageButton sendingButton;
+    private ListView listOfMessages;
+    private ImageView userImage;
+    private FirebaseUser mFirebaseRef;
+    private ArrayList<String> messagesForWidgets;
     int counter = 0;
     int counter2 = 0;
     private String userEmail = "Welcome    ";
@@ -97,14 +97,14 @@ public class MessageActivity extends AppCompatActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_message);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        sendingButton = (ImageButton) findViewById(R.id.send_button);
-        listOfMessages = (ListView) findViewById(R.id.list_of_messages_in_activity);
+        sendingButton = findViewById(R.id.send_button);
+        listOfMessages =  findViewById(R.id.list_of_messages_in_activity);
         sendingButton.setOnClickListener(this);
         mFirebaseRef = FirebaseAuth.getInstance().getCurrentUser();
-
+        if(mFirebaseRef!=null)
         userEmail = userEmail + mFirebaseRef.getEmail();
         messagesForWidgets = new ArrayList<>();
 
@@ -137,13 +137,13 @@ public class MessageActivity extends AppCompatActivity implements View.OnClickLi
             Toast.makeText(this, "You clicked " + "send_button", Toast.LENGTH_SHORT).show();
             Log.v("hhh", "send pressed");
             sendMessage();
-        } else if (i == R.id.send_button) {
-        }
+        } /*else if (i == R.id.send_button) {
+        }*/
 
     }
 
-    public void sendMessage() {
-        EditText input = (EditText) findViewById(R.id.edit_query);
+    private  void sendMessage() {
+        EditText input =  findViewById(R.id.edit_query);
 
         // Read the input field and push a new instance
         // of ChatMessage to the Firebase database

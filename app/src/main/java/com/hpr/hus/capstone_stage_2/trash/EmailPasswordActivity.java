@@ -1,6 +1,6 @@
 package com.hpr.hus.capstone_stage_2.trash;
 
-public class EmailPasswordActivity { /*extends BaseActivity implements
+ class EmailPasswordActivity { /*extends BaseActivity implements
         View.OnClickListener {
 
     private static final String TAG = "EmailPassword";

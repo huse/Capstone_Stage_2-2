@@ -99,6 +99,7 @@ public class SignInActivityWithDrive extends AppCompatActivity implements
 
     // [START handleSignInResult]
     private void handleSignInResult(@Nullable Task<GoogleSignInAccount> completedTask) {
+        if(completedTask!=null)
         Log.d(TAG, "handleSignInResult:" + completedTask.isSuccessful());
 
         try {

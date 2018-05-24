@@ -20,7 +20,7 @@ import com.hpr.hus.capstone_stage_2.recycler.RecyclerViewAdapterList;
 import java.util.ArrayList;
 
 public class ListMessageFragment extends Fragment implements RecyclerViewAdapterList.ItemClickListener {
-    RecyclerViewAdapterList adapter;
+    private RecyclerViewAdapterList adapter;
 
     public ListMessageFragment() {
 

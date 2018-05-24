@@ -82,7 +82,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     MenuView.ItemView signOutNav;
     @BindView(R.id.nav_go_to_messages)
     MenuView.ItemView goToMessageNav;
-    NavigationView navigationView;
+    private NavigationView navigationView;
     private FirebaseAuth mAuth;
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
@@ -116,10 +116,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
 
         // Set up the login form.
-        mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
+        mEmailView = findViewById(R.id.email);
         populateAutoComplete();
 
-        mPasswordView = (EditText) findViewById(R.id.password);
+        mPasswordView = findViewById(R.id.password);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
@@ -139,7 +139,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             }
         });*/
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -252,6 +252,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     @Override
     public void onClick(View v) {
         int i = v.getId();
+
         if (i == R.id.email_create_account_button) {
             createAccount(mEmailView.getText().toString(), mPasswordView.getText().toString());
         } else if (i == R.id.email_sign_in_button) {
@@ -309,6 +310,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                            if(task.getException()!=null)
                             Toast.makeText(LoginActivity.this, "Authentication failed." + task.getException().toString(),
                                     Toast.LENGTH_SHORT).show();
                             updateUI(null);
@@ -344,13 +346,16 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         return valid;
     }
 
-    public void hideProgressDialog() {
+    private  void hideProgressDialog() {
        /* if (mProgressDialog != null && mProgressDialog.isShowing()) {
             mProgressDialog.dismiss();
         }*/
+       String reserevedMethod="";
     }
 
-    public void showProgressDialog() {
+    private  void showProgressDialog() {
+        String reserevedMethod="";
+
         /*if (mProgressDialog == null) {
             mProgressDialog = new ProgressDialog(this);
             mProgressDialog.setMessage(getString(R.string.loading));
@@ -433,7 +438,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         // [END send_email_verification]
     }
 
-    public void runnignIntentActivity() {
+    private  void runnignIntentActivity() {
         Bundle selecteUserBundle = new Bundle();
         ArrayList<Integer> selectedUser = new ArrayList<>();
         //  selectedUser.add(clickedItemIndex);
@@ -633,7 +638,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -700,7 +705,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         }
 
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
@@ -720,7 +725,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      * Represents an asynchronous login/registration task used to authenticate
      * the user.
      */
-    public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
+     class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
 
         private final String mEmail;
         private final String mPassword;

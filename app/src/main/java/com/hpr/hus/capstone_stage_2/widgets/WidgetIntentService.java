@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class WidgetIntentService extends IntentService {
 
-    public static String INGREDIENT_LIST = "INGREDIENT_LIST";
+    private final static String INGREDIENT_LIST = "INGREDIENT_LIST";
     public static String TAG = "hhh WidgetIntentService";
     int counter = 0;
 

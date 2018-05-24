@@ -14,10 +14,10 @@ import com.hpr.hus.capstone_stage_2.activities.MessageActivity;
 import java.util.ArrayList;
 
 public class WidgetProvider extends AppWidgetProvider {
-    public static String INGREDIENT_LIST = "INGREDIENT_LIST";
+    private final static String INGREDIENT_LIST = "INGREDIENT_LIST";
     static ArrayList<String> messagesListInProvider = new ArrayList<>();
 
-    static void updateAppWidget(Context context, AppWidgetManager appWidgetManager, int appWidgetId) {
+    private  static void updateAppWidget(Context context, AppWidgetManager appWidgetManager, int appWidgetId) {
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget);
         Intent appIntent = new Intent(context, MessageActivity.class);
         appIntent.addCategory(Intent.ACTION_MAIN);
@@ -30,7 +30,7 @@ public class WidgetProvider extends AppWidgetProvider {
         appWidgetManager.updateAppWidget(appWidgetId, views);
     }
 
-    public static void updatingWidgets(Context context, AppWidgetManager appWidgetManager, int[] widgetId) {
+    private  static void updatingWidgets(Context context, AppWidgetManager appWidgetManager, int[] widgetId) {
         for (int appWidgetId : widgetId) {
             updateAppWidget(context, appWidgetManager, appWidgetId);
         }
@@ -53,7 +53,7 @@ public class WidgetProvider extends AppWidgetProvider {
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
         int[] WidgetId = appWidgetManager.getAppWidgetIds(new ComponentName(context, WidgetProvider.class));
         String intentAction = intent.getAction();
-        if (intentAction.equals("android.appwidget.action.APPWIDGET_UPDATE2")) {
+        if (intentAction!=null && intentAction.equals("android.appwidget.action.APPWIDGET_UPDATE2")) {
             messagesListInProvider = intent.getExtras().getStringArrayList(INGREDIENT_LIST);
             appWidgetManager.notifyAppWidgetViewDataChanged(WidgetId, R.id.grid_widget);
             WidgetProvider.updatingWidgets(context, appWidgetManager, WidgetId);

@@ -28,7 +28,7 @@ import com.hpr.hus.capstone_stage_2.R;
 public class ServerAuthCodeActivity extends AppCompatActivity implements
         View.OnClickListener {
 
-    public static final String TAG = "ServerAuthCodeActivity";
+    private  static final String TAG = "ServerAuthCodeActivity";
     private static final int RC_GET_AUTH_CODE = 9003;
 
     private GoogleSignInClient mGoogleSignInClient;

@@ -1,6 +1,7 @@
 package com.hpr.hus.capstone_stage_2.recycler;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,8 +15,8 @@ import java.util.List;
 
 public class RecyclerViewAdapterList extends RecyclerView.Adapter<RecyclerViewAdapterList.ViewHolder> {
 
-    private List<String> mData;
-    private LayoutInflater mInflater;
+    private final List<String> mData;
+    private final LayoutInflater mInflater;
     private ItemClickListener mClickListener;
 
     // data passed to constructor
@@ -33,6 +34,7 @@ public class RecyclerViewAdapterList extends RecyclerView.Adapter<RecyclerViewAd
 
     // inflates row layout from xml whenever needs
     @Override
+    @NonNull
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = mInflater.inflate(R.layout.recyclerview_layout, parent, false);
         return new ViewHolder(view);
@@ -68,7 +70,7 @@ public class RecyclerViewAdapterList extends RecyclerView.Adapter<RecyclerViewAd
 
     // recycles views , stores as they will be scrolled off screen
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        TextView myTextView;
+        final TextView myTextView;
 
         ViewHolder(View itemView) {
             super(itemView);

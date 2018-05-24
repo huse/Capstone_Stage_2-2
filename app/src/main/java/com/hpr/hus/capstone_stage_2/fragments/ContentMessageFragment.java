@@ -33,10 +33,10 @@ public class ContentMessageFragment extends Fragment implements RecyclerViewAdap
     EditText editTextQuery;
     @BindView(R.id.send_button)
     ImageButton sendButton;
-    ImageButton sendingButton;
-    ListView listOfMessages;
-    RecyclerViewAdapterMessages recyclerViewAdapterMessages;
-    View rootView;
+    private ImageButton sendingButton;
+    private ListView listOfMessages;
+    private RecyclerViewAdapterMessages recyclerViewAdapterMessages;
+    private View rootView;
     private FirebaseListAdapter<GetSetMessage> firebaseListAdapter;
 
     public ContentMessageFragment() {
@@ -50,8 +50,8 @@ public class ContentMessageFragment extends Fragment implements RecyclerViewAdap
         rootView = layoutInflater.inflate(R.layout.fragment_message_content, viewGroup, false);
 
 
-        sendingButton = (ImageButton) rootView.findViewById(R.id.send_button);
-        listOfMessages = (ListView) rootView.findViewById(R.id.list_of_messages_in_activity);
+        sendingButton = rootView.findViewById(R.id.send_button);
+        listOfMessages = rootView.findViewById(R.id.list_of_messages_in_activity);
         sendingButton.setOnClickListener(this);
         LinearLayout linearLayout = rootView.findViewById(R.id.linear_message_list);
         // RecyclerViewAdapter adapter;
@@ -111,8 +111,8 @@ public class ContentMessageFragment extends Fragment implements RecyclerViewAdap
             Toast.makeText(getActivity(), "You clicked " + "send_button", Toast.LENGTH_SHORT).show();
             Log.v("hhh", "send pressed");
             sendMessage();
-        } else if (i == R.id.send_button) {
-        }
+        } /*else if (i == R.id.send_button) {
+        }*/
 
     }
 
@@ -124,13 +124,13 @@ public class ContentMessageFragment extends Fragment implements RecyclerViewAdap
             Toast.makeText(getActivity(), "You clicked " + "send_button", Toast.LENGTH_SHORT).show();
             Log.v("hhh", "send pressed");
             sendMessage();
-        } else if (i == R.id.send_button) {
-        }
+        } /*else if (i == R.id.send_button) {
+        }*/
 
     }
 
-    public void sendMessage() {
-        EditText input = (EditText) rootView.findViewById(R.id.edit_query);
+    private  void sendMessage() {
+        EditText input = rootView.findViewById(R.id.edit_query);
 
         // Read the input field and push a new instance
         // of ChatMessage to the Firebase database
@@ -159,9 +159,9 @@ public class ContentMessageFragment extends Fragment implements RecyclerViewAdap
             @Override
             protected void populateView(View v, GetSetMessage model, int position) {
                 // Get references to the views of messageformat.xml
-                TextView messageText = (TextView) v.findViewById(R.id.message_content);
-                TextView messageUser = (TextView) v.findViewById(R.id.sender_user);
-                TextView messageTime = (TextView) v.findViewById(R.id.date_time);
+                TextView messageText = v.findViewById(R.id.message_content);
+                TextView messageUser = v.findViewById(R.id.sender_user);
+                TextView messageTime = v.findViewById(R.id.date_time);
 
                 // Set their text
                 messageText.setText(model.getMessageText());

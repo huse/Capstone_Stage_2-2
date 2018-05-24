@@ -98,7 +98,7 @@ public class LoginActivity3 extends AppCompatActivity implements LoaderCallbacks
     private TextView mStatusTextView;
     private TextView mDetailTextView;
 
-    public static void getUserProfile(FirebaseUser user) {
+    private  static void getUserProfile(FirebaseUser user) {
 
         if (user != null) {
             for (UserInfo profile : user.getProviderData()) {
@@ -140,10 +140,10 @@ public class LoginActivity3 extends AppCompatActivity implements LoaderCallbacks
 
 
         // Set up the login form.
-        mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
+        mEmailView = findViewById(R.id.email);
         populateAutoComplete();
 
-        mPasswordView = (EditText) findViewById(R.id.password);
+        mPasswordView = findViewById(R.id.password);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
@@ -166,7 +166,7 @@ public class LoginActivity3 extends AppCompatActivity implements LoaderCallbacks
             }
         });*/
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -343,7 +343,8 @@ public class LoginActivity3 extends AppCompatActivity implements LoaderCallbacks
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(LoginActivity3.this, "Authentication failed." + task.getException().toString(),
+                            if(task.getException()!=null)
+                                Toast.makeText(LoginActivity3.this, "Authentication failed." + task.getException().toString(),
                                     Toast.LENGTH_SHORT).show();
                             updateUI(null);
                         }
@@ -379,13 +380,17 @@ public class LoginActivity3 extends AppCompatActivity implements LoaderCallbacks
         return valid;
     }
 
-    public void hideProgressDialog() {
+    private  void hideProgressDialog() {
        /* if (mProgressDialog != null && mProgressDialog.isShowing()) {
             mProgressDialog.dismiss();
         }*/
+        String reserevedMethod="";
+
     }
 
-    public void showProgressDialog() {
+    private  void showProgressDialog() {
+        String reserevedMethod="";
+
         /*if (mProgressDialog == null) {
             mProgressDialog = new ProgressDialog(this);
             mProgressDialog.setMessage(getString(R.string.loading));
@@ -435,7 +440,7 @@ public class LoginActivity3 extends AppCompatActivity implements LoaderCallbacks
         // [END sign_in_with_email]
     }
 
-    public void signOut() {
+    private  void signOut() {
         mAuth.signOut();
         updateUI(null);
     }
@@ -475,8 +480,9 @@ public class LoginActivity3 extends AppCompatActivity implements LoaderCallbacks
         // [END send_email_verification]
     }
 
-    public void runnignIntentActivity(FirebaseAuth mAuthl) {
-        Log.v("jjj", "runnignIntentActivity   " + mAuthl.getCurrentUser().getEmail());
+    private  void runnignIntentActivity(FirebaseAuth mAuthl) {
+        if(mAuthl.getCurrentUser()!=null)
+            Log.v("jjj", "runnignIntentActivity   " + mAuthl.getCurrentUser().getEmail());
 
         // if(mAuthl.isSignInWithEmailLink(mAuthl.getCurrentUser().getEmail())){
         Bundle selectedRecipeBundle = new Bundle();
@@ -625,7 +631,7 @@ public class LoginActivity3 extends AppCompatActivity implements LoaderCallbacks
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {

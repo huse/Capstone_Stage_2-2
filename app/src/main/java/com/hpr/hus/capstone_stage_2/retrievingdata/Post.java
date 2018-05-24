@@ -3,10 +3,10 @@ package com.hpr.hus.capstone_stage_2.retrievingdata;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class Post {
+ class Post {
 
     // Get a reference to our posts
-    final FirebaseDatabase database = FirebaseDatabase.getInstance();
+    private final FirebaseDatabase database = FirebaseDatabase.getInstance();
     public String author;
     public String title;
     DatabaseReference ref = database.getReference("server/saving-data/fireblog/posts");

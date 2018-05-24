@@ -25,8 +25,8 @@ import com.hpr.hus.capstone_stage_2.fragments.ListMessageFragment;
 
 public class MessageDetailActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private static final String TAG = "hhh Message";
-    static String STEP_STACK_DETAIL = "Step_Stack_detail";
-    FirebaseUser mFirebaseRef;
+    private static String STEP_STACK_DETAIL = "Step_Stack_detail";
+    private FirebaseUser mFirebaseRef;
     NavigationView navigationView;
     private String userEmail = "Welcome    ";
 
@@ -37,11 +37,12 @@ public class MessageDetailActivity extends AppCompatActivity implements Navigati
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_message);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
 
         mFirebaseRef = FirebaseAuth.getInstance().getCurrentUser();
+        if(mFirebaseRef!=null)
         userEmail = userEmail + mFirebaseRef.getEmail();
 
 

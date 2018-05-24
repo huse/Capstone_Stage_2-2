@@ -10,7 +10,7 @@ import com.hpr.hus.capstone_stage_2.R;
 import java.util.List;
 
 public class WidgetService extends RemoteViewsService {
-    List<String> messagesList;
+    private List<String> messagesList;
 
     @Override
     public RemoteViewsFactory onGetViewFactory(Intent intent) {
@@ -20,7 +20,7 @@ public class WidgetService extends RemoteViewsService {
     class GridWidgetView implements RemoteViewsService.RemoteViewsFactory {
         Context mContext = null;
 
-        public GridWidgetView(Context context, Intent intent) {
+         GridWidgetView(Context context, Intent intent) {
             mContext = context;
         }
 

@@ -1,6 +1,6 @@
 package com.hpr.hus.capstone_stage_2.trash;
 
-public class BaseActivity// extends AppCompatActivity {
+ class BaseActivity// extends AppCompatActivity {
 {
    /* @VisibleForTesting
     public ProgressDialog mProgressDialog;

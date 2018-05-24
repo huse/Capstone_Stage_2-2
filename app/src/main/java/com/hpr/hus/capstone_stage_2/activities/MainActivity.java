@@ -16,14 +16,14 @@ import com.hpr.hus.capstone_stage_2.recycler.RecyclerViewAdapterList;
 
 public class MainActivity extends AppCompatActivity implements RecyclerViewAdapterList.ItemClickListener {
     RecyclerViewAdapterList adapter;
-    private FirebaseAnalytics mFirebaseAnalytics;
-    private StorageReference mStorageRef;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_3);
-
+        FirebaseAnalytics mFirebaseAnalytics;
+        StorageReference mStorageRef;
 
         // Obtain the FirebaseAnalytics instance.
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);

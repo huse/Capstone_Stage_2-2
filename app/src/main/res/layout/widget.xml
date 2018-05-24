@@ -8,11 +8,11 @@
         android:id="@+id/grid_widget"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:columnWidth="28dp"
         android:layout_margin="3dp"
+        android:columnWidth="28dp"
         android:horizontalSpacing="6dp"
-        android:verticalSpacing="6dp"
         android:numColumns="1"
+        android:verticalSpacing="6dp"
 
         />
 

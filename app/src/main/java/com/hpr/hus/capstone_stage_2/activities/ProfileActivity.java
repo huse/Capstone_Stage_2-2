@@ -4,7 +4,7 @@ import android.os.Bundle;
 
 import com.hpr.hus.capstone_stage_2.R;
 
-public class ProfileActivity extends MessageActivity{
+public class ProfileActivity extends MessageActivity {
 
 
     @Override

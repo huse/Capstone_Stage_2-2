@@ -3,13 +3,11 @@ package com.hpr.hus.capstone_stage_2.messaging;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
-import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
@@ -18,13 +16,14 @@ import com.firebase.jobdispatcher.GooglePlayDriver;
 import com.firebase.jobdispatcher.Job;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
-import com.hpr.hus.capstone_stage_2.activities.MainActivity;
 import com.hpr.hus.capstone_stage_2.R;
+import com.hpr.hus.capstone_stage_2.activities.MainActivity;
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
+    private static final String TAG = "hhh MyService";
+
     public MyFirebaseMessagingService() {
     }
-    private static final String TAG = "hhh MyService";
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
@@ -56,6 +55,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         // Also if you intend on generating your own notifications as a result of a received FCM
         // message, here is where that should be initiated. See sendNotification method below.
     }
+
     private void scheduleJob() {
         // [START dispatch_job]
         FirebaseJobDispatcher dispatcher = new FirebaseJobDispatcher(new GooglePlayDriver(this));
@@ -66,6 +66,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         dispatcher.schedule(myJob);
         // [END dispatch_job]
     }
+
     private void handleNow() {
         Log.d(TAG, "Short lived task is done.");
     }
@@ -77,7 +78,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 PendingIntent.FLAG_ONE_SHOT);
 
         String channelId = getString(R.string.default_notification_channel_id);
-        Uri defaultSoundUri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder =
                 new NotificationCompat.Builder(this, channelId)
                         .setSmallIcon(R.drawable.ic_stat_ic_notification)

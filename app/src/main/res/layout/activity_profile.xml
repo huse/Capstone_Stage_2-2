@@ -1,39 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent">
 
     <include
-        layout="@layout/app_bar_main"
         android:id="@+id/my_toolbar"
-        app:layout_constraintStart_toStartOf="parent"
+        layout="@layout/app_bar_main"
         android:layout_width="match_parent"
-        android:layout_height="50dp" />
+        android:layout_height="50dp"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/username_text_view"
         android:layout_width="328dp"
         android:layout_height="45dp"
         android:layout_marginTop="64dp"
-        android:hint="Display name"
-        android:text="User name"
-        app:layout_constraintTop_toBottomOf="@id/my_toolbar"
-        tools:layout_editor_absoluteX="28dp" />
+        android:hint="@string/Display_name"
+        android:text="@string/User_name"
+        app:layout_constraintBottom_toTopOf="@+id/picture_url"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/my_toolbar" />
 
     <EditText
         android:id="@+id/picture_url"
         android:layout_width="331dp"
         android:layout_height="0dp"
+        android:layout_marginStart="64dp"
         android:layout_marginTop="64dp"
-        android:layout_marginLeft="64dp"
 
-        android:hint="User picture URL"
-        android:text="Picture URL"
-        app:layout_constraintTop_toBottomOf="@id/username_text_view"
+        android:hint="@string/User_picture_URL"
+        android:text="@string/User_picture_URL"
+        app:layout_constraintEnd_toEndOf="parent"
 
-        tools:layout_editor_absoluteX="27dp" />
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/username_text_view" />
 
     <Button
         android:id="@+id/update_profile"
@@ -41,12 +46,32 @@
         android:layout_height="70dp"
         android:layout_marginTop="68dp"
         android:padding="20dp"
-        android:text="Update profile"
-        app:layout_constraintTop_toBottomOf="@id/picture_url"
-        tools:layout_editor_absoluteX="145dp" />
+        android:text="@string/Update_profile"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/picture_url" />
 
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp" />
 
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp" />
 
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp" />
 
 
 </android.support.constraint.ConstraintLayout>

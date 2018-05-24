@@ -29,7 +29,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.hpr.hus.capstone_stage_2.R;
 import com.hpr.hus.capstone_stage_2.activities.MessageDetailActivity;
@@ -113,16 +112,18 @@ public class LoginActivity2 extends AppCompatActivity implements LoaderCallbacks
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
     }
-public void runnignIntentActivity(){
-    Bundle selectedRecipeBundle = new Bundle();
-    ArrayList<Integer> selectedRecipe = new ArrayList<>();
-    //  selectedRecipe.add(clickedItemIndex);
-    //  selectedRecipeBundle.putParcelableArrayList("Select_Recipe",selectedRecipe);
-    Log.v("jjj", "runnignIntentActivity");
-    final Intent intent = new Intent(this, MessageDetailActivity.class);
-    intent.putExtras(selectedRecipeBundle);
-    startActivity(intent);
-}
+
+    public void runnignIntentActivity() {
+        Bundle selectedRecipeBundle = new Bundle();
+        ArrayList<Integer> selectedRecipe = new ArrayList<>();
+        //  selectedRecipe.add(clickedItemIndex);
+        //  selectedRecipeBundle.putParcelableArrayList("Select_Recipe",selectedRecipe);
+        Log.v("jjj", "runnignIntentActivity");
+        final Intent intent = new Intent(this, MessageDetailActivity.class);
+        intent.putExtras(selectedRecipeBundle);
+        startActivity(intent);
+    }
+
     private void populateAutoComplete() {
         if (!mayRequestContacts()) {
             return;
@@ -367,7 +368,7 @@ public void runnignIntentActivity(){
                 runnignIntentActivity();
 
 
-               // finish();
+                // finish();
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
                 mPasswordView.requestFocus();

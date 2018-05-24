@@ -15,12 +15,10 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.menu.MenuView;
 import android.support.v7.widget.Toolbar;
@@ -38,45 +36,35 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static android.Manifest.permission.READ_CONTACTS;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
-import com.hpr.hus.capstone_stage_2.activities.MessageDetailActivity;
 import com.hpr.hus.capstone_stage_2.R;
+import com.hpr.hus.capstone_stage_2.activities.MessageDetailActivity;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
+
+import static android.Manifest.permission.READ_CONTACTS;
 
 /**
  * A login screen that offers login via email/password.
  */
-public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> ,View.OnClickListener,NavigationView.OnNavigationItemSelectedListener{
+public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor>, View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
 
     private static final String TAG = "hhh LoginActivity:";
-    private FirebaseAuth mAuth;
-
-
-
-    //butterknife
-
-    @BindView(R.id.nav_sign_in)MenuView.ItemView signInNav;
-    @BindView(R.id.nav_create_account)MenuView.ItemView createAccountNav;
-    @BindView(R.id.nav_verify_email)MenuView.ItemView verifyEmailNav;
-    @BindView(R.id.nav_sign_out)MenuView.ItemView signOutNav;
-    @BindView(R.id.nav_go_to_messages)MenuView.ItemView goToMessageNav;
-
     /**
      * Id to identity READ_CONTACTS permission request.
      */
     private static final int REQUEST_READ_CONTACTS = 0;
 
+
+    //butterknife
     /**
      * A dummy authentication store containing known user names and passwords.
      * TODO: remove after connecting to a real authentication system.
@@ -84,11 +72,22 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private static final String[] DUMMY_CREDENTIALS = new String[]{
             "foo@example.com:hello", "bar@example.com:world"
     };
+    @BindView(R.id.nav_sign_in)
+    MenuView.ItemView signInNav;
+    @BindView(R.id.nav_create_account)
+    MenuView.ItemView createAccountNav;
+    @BindView(R.id.nav_verify_email)
+    MenuView.ItemView verifyEmailNav;
+    @BindView(R.id.nav_sign_out)
+    MenuView.ItemView signOutNav;
+    @BindView(R.id.nav_go_to_messages)
+    MenuView.ItemView goToMessageNav;
+    NavigationView navigationView;
+    private FirebaseAuth mAuth;
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
      */
     private UserLoginTask mAuthTask = null;
-
     // UI references.
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
@@ -97,7 +96,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private TextView mStatusTextView;
     private TextView mDetailTextView;
 
-    NavigationView navigationView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -115,8 +113,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         findViewById(R.id.sign_out_button).setOnClickListener(this);
         findViewById(R.id.verify_email_button).setOnClickListener(this);
         findViewById(R.id.go_to_messages_button).setOnClickListener(this);
-
-
 
 
         // Set up the login form.
@@ -165,15 +161,17 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         navigationView.setNavigationItemSelectedListener(this);*/
     }
 
-public void toastingMessage(){
-    Toast.makeText(LoginActivity.this, "This is for test.",
-            Toast.LENGTH_SHORT).show();
-}
+    public void toastingMessage() {
+        Toast.makeText(LoginActivity.this, "This is for test.",
+                Toast.LENGTH_SHORT).show();
+    }
+
     private void updateUI(FirebaseUser user) {
 
         if (user != null) {
-             mStatusTextView.setText("Welcome  "+getString(R.string.google_status_fmt, user.getEmail(), user.isEmailVerified()));
-             mDetailTextView.setText(getString(R.string.firebase_status_fmt, user.getUid()));
+            String welcome = R.string.Welcome  + getString(R.string.google_status_fmt, user.getEmail(), user.isEmailVerified());
+            mStatusTextView.setText(welcome);
+            mDetailTextView.setText(getString(R.string.firebase_status_fmt, user.getUid()));
 
             findViewById(R.id.email_sign_in_button).setVisibility(View.GONE);
             findViewById(R.id.email_create_account_button).setVisibility(View.GONE);
@@ -181,9 +179,9 @@ public void toastingMessage(){
             findViewById(R.id.verify_email_button).setVisibility(View.VISIBLE);
             findViewById(R.id.go_to_messages_button).setVisibility(View.VISIBLE);
             findViewById(R.id.verify_email_button).setEnabled(!user.isEmailVerified());
-                if(user.isEmailVerified()){
-                    Log.v("hhh", "in singed in");
-                }
+            if (user.isEmailVerified()) {
+                Log.v("hhh", "in singed in");
+            }
 
 
             navigationView.getMenu().findItem(R.id.nav_sign_in).setEnabled(false);
@@ -193,13 +191,13 @@ public void toastingMessage(){
             navigationView.getMenu().findItem(R.id.nav_go_to_messages).setEnabled(true);
 
         } else {
-              mStatusTextView.setText(R.string.signed_out);
-              mDetailTextView.setText(null);
+            mStatusTextView.setText(R.string.signed_out);
+            mDetailTextView.setText(null);
 
-           findViewById(R.id.email_sign_in_button).setVisibility(View.VISIBLE);
+            findViewById(R.id.email_sign_in_button).setVisibility(View.VISIBLE);
             findViewById(R.id.email_create_account_button).setVisibility(View.VISIBLE);
             findViewById(R.id.sign_out_button).setVisibility(View.GONE);
-             findViewById(R.id.verify_email_button).setVisibility(View.GONE);
+            findViewById(R.id.verify_email_button).setVisibility(View.GONE);
             findViewById(R.id.go_to_messages_button).setVisibility(View.GONE);
 
             navigationView.getMenu().findItem(R.id.nav_sign_in).setEnabled(true);
@@ -210,7 +208,8 @@ public void toastingMessage(){
 
         }
     }
-    public boolean checkIfUserVerified(){
+
+    public boolean checkIfUserVerified() {
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         boolean emailVerified = false;
@@ -231,24 +230,24 @@ public void toastingMessage(){
         return emailVerified;
     }
 
-        public void  userUpdateProfile(){
-            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    public void userUpdateProfile() {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                    .setDisplayName("Jane Q. User")
-                    .setPhotoUri(Uri.parse("https://example.com/jane-q-user/profile.jpg"))
-                    .build();
+        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                .setDisplayName("Jane Q. User")
+                .setPhotoUri(Uri.parse("https://example.com/jane-q-user/profile.jpg"))
+                .build();
 
-            user.updateProfile(profileUpdates)
-                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if (task.isSuccessful()) {
-                                Log.d(TAG, "User profile updated.");
-                            }
+        user.updateProfile(profileUpdates)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Log.d(TAG, "User profile updated.");
                         }
-                    });
-        }
+                    }
+                });
+    }
 
     @Override
     public void onClick(View v) {
@@ -258,9 +257,10 @@ public void toastingMessage(){
         } else if (i == R.id.email_sign_in_button) {
             signIn(mEmailView.getText().toString(), mPasswordView.getText().toString());
 
-        } else if (i == R.id.sign_out_button) {Toast.makeText(LoginActivity.this, "sign_out_button",
-                Toast.LENGTH_SHORT).show();
-           // signOut();
+        } else if (i == R.id.sign_out_button) {
+            Toast.makeText(LoginActivity.this, "sign_out_button",
+                    Toast.LENGTH_SHORT).show();
+            // signOut();
         } else if (i == R.id.verify_email_button) {
             sendEmailVerification();
         } else if (i == R.id.go_to_messages_button) {
@@ -274,9 +274,6 @@ public void toastingMessage(){
 
         }
     }
-
-
-
 
 
     // [START on_start_check_user]
@@ -312,7 +309,7 @@ public void toastingMessage(){
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(LoginActivity.this, "Authentication failed." +  task.getException().toString(),
+                            Toast.makeText(LoginActivity.this, "Authentication failed." + task.getException().toString(),
                                     Toast.LENGTH_SHORT).show();
                             updateUI(null);
                         }
@@ -324,6 +321,7 @@ public void toastingMessage(){
                 });
         // [END create_user_with_email]
     }
+
     private boolean validateForm() {
         boolean valid = true;
 
@@ -351,6 +349,7 @@ public void toastingMessage(){
             mProgressDialog.dismiss();
         }*/
     }
+
     public void showProgressDialog() {
         /*if (mProgressDialog == null) {
             mProgressDialog = new ProgressDialog(this);
@@ -397,6 +396,7 @@ public void toastingMessage(){
                 });
         // [END sign_in_with_email]
     }
+
     private void signOut() {
         mAuth.signOut();
         updateUI(null);
@@ -433,18 +433,19 @@ public void toastingMessage(){
         // [END send_email_verification]
     }
 
-public void runnignIntentActivity(){
-    Bundle selecteUserBundle = new Bundle();
-    ArrayList<Integer> selectedUser = new ArrayList<>();
-    //  selectedUser.add(clickedItemIndex);
-    //  selecteUserBundle.putParcelableArrayList("Select_Recipe",selectedUser);
+    public void runnignIntentActivity() {
+        Bundle selecteUserBundle = new Bundle();
+        ArrayList<Integer> selectedUser = new ArrayList<>();
+        //  selectedUser.add(clickedItemIndex);
+        //  selecteUserBundle.putParcelableArrayList("Select_Recipe",selectedUser);
 
 
-    Log.v("jjj", "runnignIntentActivity");
-    final Intent intent = new Intent(this, MessageDetailActivity.class);
-    intent.putExtras(selecteUserBundle);
-    startActivity(intent);
-}
+        Log.v("jjj", "runnignIntentActivity");
+        final Intent intent = new Intent(this, MessageDetailActivity.class);
+        intent.putExtras(selecteUserBundle);
+        startActivity(intent);
+    }
+
     private void populateAutoComplete() {
         if (!mayRequestContacts()) {
             return;
@@ -629,6 +630,7 @@ public void runnignIntentActivity(){
 
         mEmailView.setAdapter(adapter);
     }
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -668,7 +670,7 @@ public void runnignIntentActivity(){
         Toast.makeText(LoginActivity.this, "getItemId  fff",
                 Toast.LENGTH_SHORT).show();
         int id = item.getItemId();
-        Toast.makeText(LoginActivity.this, "getItemId  " +id,
+        Toast.makeText(LoginActivity.this, "getItemId  " + id,
                 Toast.LENGTH_SHORT).show();
         if (id == R.id.nav_sign_in) {
             Toast.makeText(LoginActivity.this, "nav_sign_in",
@@ -696,8 +698,6 @@ public void runnignIntentActivity(){
                     Toast.LENGTH_SHORT).show();
 
         }
-
-
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -751,7 +751,7 @@ public void runnignIntentActivity(){
             }
 
             // TODO: register the new account here.
-            createAccount(mEmail,mPassword);
+            createAccount(mEmail, mPassword);
             return true;
         }
 
@@ -766,7 +766,7 @@ public void runnignIntentActivity(){
                 runnignIntentActivity();
 
 
-               // finish();
+                // finish();
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
                 mPasswordView.requestFocus();

@@ -1,25 +1,16 @@
 package com.hpr.hus.capstone_stage_2.activities;
 
-import android.app.LoaderManager;
-import android.content.Intent;
-import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.EditText;
 
-import com.firebase.client.Firebase;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserInfo;
@@ -31,16 +22,16 @@ import com.google.firebase.database.ValueEventListener;
 import com.hpr.hus.capstone_stage_2.R;
 import com.hpr.hus.capstone_stage_2.fragments.ContentMessageFragment;
 import com.hpr.hus.capstone_stage_2.fragments.ListMessageFragment;
-import com.hpr.hus.capstone_stage_2.login.LoginActivity3;
 
-public class MessageDetailActivity extends AppCompatActivity implements  NavigationView.OnNavigationItemSelectedListener{
+public class MessageDetailActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private static final String TAG = "hhh Message";
-    static String STEP_STACK_DETAIL="Step_Stack_detail";
+    static String STEP_STACK_DETAIL = "Step_Stack_detail";
     FirebaseUser mFirebaseRef;
     NavigationView navigationView;
-    private String userEmail= "Welcome    ";
+    private String userEmail = "Welcome    ";
 
     private DatabaseReference userDatabase;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,9 +41,7 @@ public class MessageDetailActivity extends AppCompatActivity implements  Navigat
         setSupportActionBar(toolbar);
 
 
-
-
-         mFirebaseRef = FirebaseAuth.getInstance().getCurrentUser();
+        mFirebaseRef = FirebaseAuth.getInstance().getCurrentUser();
         userEmail = userEmail + mFirebaseRef.getEmail();
 
 
@@ -71,7 +60,7 @@ public class MessageDetailActivity extends AppCompatActivity implements  Navigat
                 Uri photoUrl = profile.getPhotoUrl();
 
 
-                Log.v("hhh Message" , "\nuser name: "  + name +"\nuser email: "  + email +"\nuser photoUrl: "  + photoUrl  );
+                Log.v("hhh Message", "\nuser name: " + name + "\nuser email: " + email + "\nuser photoUrl: " + photoUrl);
             }
         }
         String userId = getIntent().getStringExtra("user_id");
@@ -80,10 +69,9 @@ public class MessageDetailActivity extends AppCompatActivity implements  Navigat
         userDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-               /* String displayName=dataSnapshot.child("name").getValue().toString();*/
-               /* String status = dataSnapshot.child("Status").getValue().toString();*/
-               /* String image = dataSnapshot.child("image").getValue().toString();*/
-
+                /* String displayName=dataSnapshot.child("name").getValue().toString();*/
+                /* String status = dataSnapshot.child("Status").getValue().toString();*/
+                /* String image = dataSnapshot.child("image").getValue().toString();*/
 
 
             }
@@ -93,8 +81,6 @@ public class MessageDetailActivity extends AppCompatActivity implements  Navigat
 
             }
         });
-
-
 
 
         if (savedInstanceState == null) {
@@ -111,7 +97,7 @@ public class MessageDetailActivity extends AppCompatActivity implements  Navigat
             fragmentManager.beginTransaction()
                     .replace(R.id.FRAGMENT_CONTAINER_ONE, fragment)
                     .commit();
-            if (findViewById(R.id.fragments_message_list_linear_layout).getTag()!=null && findViewById(R.id.fragments_message_list_linear_layout).getTag().equals("tablet")) {
+            if (findViewById(R.id.fragments_message_list_linear_layout).getTag() != null && findViewById(R.id.fragments_message_list_linear_layout).getTag().equals("tablet")) {
                 Log.v("jjj", "RecipeDetailActivity 3");
 
                 final ContentMessageFragment fragment2 = new ContentMessageFragment();
@@ -122,8 +108,6 @@ public class MessageDetailActivity extends AppCompatActivity implements  Navigat
 
             }
         }
-
-
 
 
     }

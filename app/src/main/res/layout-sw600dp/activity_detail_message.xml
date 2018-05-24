@@ -1,21 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
- <LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 
     android:id="@+id/fragments_message_list_linear_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:orientation="vertical"
+    android:tag="tablet"
+
+    >
+
+    <include
+        layout="@layout/app_bar_main"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-
-        android:orientation="vertical"
-        android:tag="tablet"
-
-        >
-
-        <include
-            layout="@layout/app_bar_main"
-            android:layout_width="match_parent"
-            android:layout_height="50dp" />
+        android:layout_height="50dp" />
 
 
     <LinearLayout
@@ -24,20 +22,18 @@
         android:orientation="horizontal">
 
 
-
         <FrameLayout
+            android:id="@+id/FRAGMENT_CONTAINER_ONE"
             android:layout_width="300dp"
             android:layout_height="match_parent"
-            android:id="@+id/FRAGMENT_CONTAINER_ONE"
-            android:scaleType= "centerInside"/>
-
+            android:scaleType="centerInside" />
 
 
         <FrameLayout
+            android:id="@+id/FRAGMENT_CONTAINER_TWO"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/FRAGMENT_CONTAINER_TWO"
-            android:scaleType= "centerInside"/>
+            android:scaleType="centerInside" />
 
 
     </LinearLayout>

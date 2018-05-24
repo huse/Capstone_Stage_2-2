@@ -1,10 +1,6 @@
 package com.hpr.hus.capstone_stage_2.retrievingdata;
 
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
 public class RetrieveData {
-
 
 
     public static class Post {

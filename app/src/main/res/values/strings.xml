@@ -35,14 +35,48 @@
     <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
 
 
-
     <string name="nav_header_title">Android Studio</string>
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
 
 
-
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_settings">Update Profile</string>
+
+
+
+    <string name="desc">Image description</string>
+    <string name="hint">Text view</string>
+    <string name="Message_content">Message content</string>
+    <string name="date">mm/dd/yyyy</string>
+    <string name="Type_here">Type here</string>
+    <string name="create_account">create account</string>
+    <string name="verify_email">verify email</string>
+    <string name="emailpassword_title_text">emailpassword title text</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="sign_in">Sign In</string>
+    <string name="Communicate">Communicate</string>
+    <string name="Go_To_Messages">Go To Messages</string>
+    <string name="Setting">Setting</string>
+    <string name="Title">Title</string>
+    <string name="Waiting_for_loading_information">Waiting for loading information</string>
+    <string name="Display_name">Display name</string>
+    <string name="User_name">User name</string>
+    <string name="User_picture_URL">User picture URL</string>
+    <string name="Update_profile">Update profile</string>
+    <string name="Welcome">Welcome</string>
+
+
+
+
+
+
+
+
+
+
+
+    desc
 </resources>

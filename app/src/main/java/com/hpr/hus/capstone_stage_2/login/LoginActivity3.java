@@ -10,17 +10,14 @@ import android.content.Loader;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.menu.MenuView;
 import android.support.v7.widget.Toolbar;
@@ -38,12 +35,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static android.Manifest.permission.READ_CONTACTS;
-
-import com.firebase.client.Firebase;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -51,11 +42,15 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserInfo;
 import com.google.firebase.auth.UserProfileChangeRequest;
-import com.hpr.hus.capstone_stage_2.activities.MessageActivity;
-import com.hpr.hus.capstone_stage_2.activities.MessageDetailActivity;
 import com.hpr.hus.capstone_stage_2.R;
+import com.hpr.hus.capstone_stage_2.activities.MessageActivity;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
+
+import static android.Manifest.permission.READ_CONTACTS;
 
 /**
  * A login screen that offers login via email/password.
@@ -64,11 +59,19 @@ public class LoginActivity3 extends AppCompatActivity implements LoaderCallbacks
 
     private static final String TAG = "hhh LoginActivity3:";
     private static final String FIREBASE_URL = "";
-    private FirebaseAuth mAuth;
-private String userEmail= "Welcome    ";
+    /**
+     * Id to identity READ_CONTACTS permission request.
+     */
+    private static final int REQUEST_READ_CONTACTS = 0;
+    /**
+     * A dummy authentication store containing known user names and passwords.
+     * TODO: remove after connecting to a real authentication system.
+     */
+    private static final String[] DUMMY_CREDENTIALS = new String[]{
+            "foo@example.com:hello", "bar@example.com:world"
+    };
 
     //butterknife
-
     @BindView(R.id.nav_sign_in)
     MenuView.ItemView signInNav;
     @BindView(R.id.nav_create_account)
@@ -79,23 +82,13 @@ private String userEmail= "Welcome    ";
     MenuView.ItemView signOutNav;
     @BindView(R.id.nav_go_to_messages)
     MenuView.ItemView goToMessageNav;
-
-    /**
-     * Id to identity READ_CONTACTS permission request.
-     */
-    private static final int REQUEST_READ_CONTACTS = 0;
-
-    /**
-     * A dummy authentication store containing known user names and passwords.
-     * TODO: remove after connecting to a real authentication system.
-     */
-    private static final String[] DUMMY_CREDENTIALS = new String[]{
-            "foo@example.com:hello", "bar@example.com:world"
-    };
+    NavigationView navigationView;
+    private FirebaseAuth mAuth;
+    private String userEmail = "Welcome    ";
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
      */
-   // private UserLoginTask mAuthTask = null;
+    // private UserLoginTask mAuthTask = null;
 
     // UI references.
     private AutoCompleteTextView mEmailView;
@@ -105,7 +98,27 @@ private String userEmail= "Welcome    ";
     private TextView mStatusTextView;
     private TextView mDetailTextView;
 
-    NavigationView navigationView;
+    public static void getUserProfile(FirebaseUser user) {
+
+        if (user != null) {
+            for (UserInfo profile : user.getProviderData()) {
+                // Id of the provider (ex: google.com)
+                String providerId = profile.getProviderId();
+
+                // UID specific to the provider
+                String uid = profile.getUid();
+
+                // Name, email address, and profile photo Url
+                String name = profile.getDisplayName();
+                String email = profile.getEmail();
+                Uri photoUrl = profile.getPhotoUrl();
+
+                Log.v("hhh", "user info" + name + email + photoUrl);
+            }
+
+        }
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -136,11 +149,11 @@ private String userEmail= "Welcome    ";
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
                 if (id == EditorInfo.IME_ACTION_DONE || id == EditorInfo.IME_NULL) {
 
-                    Log.v("hhh" , "id=   " +id +"" );
-                   // attemptLogin();
+                    Log.v("hhh", "id=   " + id + "");
+                    // attemptLogin();
                     return true;
                 }
-                Log.v("hhh" , "false id=   " +id +"" );
+                Log.v("hhh", "false id=   " + id + "");
                 return false;
             }
         });
@@ -183,7 +196,8 @@ private String userEmail= "Welcome    ";
     private void updateUI(FirebaseUser user) {
 
         if (user != null) {
-            mStatusTextView.setText("Welcome  " + getString(R.string.google_status_fmt, user.getEmail(), user.isEmailVerified()));
+            String welcome = R.string.Welcome  + getString(R.string.google_status_fmt, user.getEmail(), user.isEmailVerified());
+            mStatusTextView.setText(welcome);
             mDetailTextView.setText(getString(R.string.firebase_status_fmt, user.getUid()));
 
             findViewById(R.id.email_sign_in_button).setVisibility(View.GONE);
@@ -289,7 +303,7 @@ private String userEmail= "Welcome    ";
 
         }
     }
-
+    // [END on_start_check_user]
 
     // [START on_start_check_user]
     @Override
@@ -299,7 +313,6 @@ private String userEmail= "Welcome    ";
         FirebaseUser currentUser = mAuth.getCurrentUser();
         updateUI(currentUser);
     }
-    // [END on_start_check_user]
 
     private void createAccount(String email, String password) {
         Log.d(TAG, "createAccount:" + email);
@@ -465,7 +478,7 @@ private String userEmail= "Welcome    ";
     public void runnignIntentActivity(FirebaseAuth mAuthl) {
         Log.v("jjj", "runnignIntentActivity   " + mAuthl.getCurrentUser().getEmail());
 
-       // if(mAuthl.isSignInWithEmailLink(mAuthl.getCurrentUser().getEmail())){
+        // if(mAuthl.isSignInWithEmailLink(mAuthl.getCurrentUser().getEmail())){
         Bundle selectedRecipeBundle = new Bundle();
         ArrayList<Integer> selectedRecipe = new ArrayList<>();
         //  selectedRecipe.add(clickedItemIndex);
@@ -475,7 +488,7 @@ private String userEmail= "Welcome    ";
         intent.putExtras(selectedRecipeBundle);
         startActivity(intent);
 
-    //}
+        //}
     }
 
     private void populateAutoComplete() {
@@ -520,8 +533,6 @@ private String userEmail= "Welcome    ";
             }
         }
     }
-
-
 
     private boolean isEmailValid(String email) {
         //TODO: Replace this with your own logic
@@ -631,26 +642,6 @@ private String userEmail= "Welcome    ";
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        /*if (id == R.id.action_settings) {
-
-
-            return true;
-        }*/
-        if (id == R.id.action_sign_out) {
-            signOut();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
 /*    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -693,6 +684,26 @@ private String userEmail= "Welcome    ";
         return true;
     }*/
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        /*if (id == R.id.action_settings) {
+
+
+            return true;
+        }*/
+        if (id == R.id.action_sign_out) {
+            signOut();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 
     private interface ProfileQuery {
         String[] PROJECTION = {
@@ -702,29 +713,6 @@ private String userEmail= "Welcome    ";
 
         int ADDRESS = 0;
         int IS_PRIMARY = 1;
-    }
-
-
-    public static void getUserProfile(FirebaseUser user){
-
-        if (user != null) {
-            for (UserInfo profile : user.getProviderData()) {
-                // Id of the provider (ex: google.com)
-                String providerId = profile.getProviderId();
-
-                // UID specific to the provider
-                String uid = profile.getUid();
-
-                // Name, email address, and profile photo Url
-                String name = profile.getDisplayName();
-                String email = profile.getEmail();
-                Uri photoUrl = profile.getPhotoUrl();
-
-                Log.v("hhh" , "user info"  + name + email + photoUrl  );
-            }
-
-        }
-
     }
 
 

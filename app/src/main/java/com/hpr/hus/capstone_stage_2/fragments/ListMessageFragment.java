@@ -19,20 +19,21 @@ import com.hpr.hus.capstone_stage_2.recycler.RecyclerViewAdapterList;
 
 import java.util.ArrayList;
 
-public class ListMessageFragment extends Fragment implements RecyclerViewAdapterList.ItemClickListener{
-    public ListMessageFragment( ){
+public class ListMessageFragment extends Fragment implements RecyclerViewAdapterList.ItemClickListener {
+    RecyclerViewAdapterList adapter;
+
+    public ListMessageFragment() {
 
     }
-    RecyclerViewAdapterList adapter;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_message_list,container,false);
+        View rootView = inflater.inflate(R.layout.fragment_message_list, container, false);
 
 
         LinearLayout linearLayout = rootView.findViewById(R.id.linear_message_list);
-       // RecyclerViewAdapter adapter;
+        // RecyclerViewAdapter adapter;
 
         // populate  RecyclerView
         ArrayList<String> placeHolder = new ArrayList<>();
@@ -48,16 +49,16 @@ public class ListMessageFragment extends Fragment implements RecyclerViewAdapter
 
 
         // setting up RecyclerView
-       // Log.v("hhh",getView().toString());
+        // Log.v("hhh",getView().toString());
         RecyclerView recyclerView = rootView.findViewById(R.id.rvMessages);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        adapter = new RecyclerViewAdapterList(this,getActivity(),placeHolder);
+        adapter = new RecyclerViewAdapterList(this, getActivity(), placeHolder);
         //adapter.setClickListener(new LinearLayoutManager(getActivity());
         recyclerView.setAdapter(adapter);
 
         // setup layoutManager
 
-        LinearLayoutManager  layoutManager = new LinearLayoutManager (getContext()) {
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext()) {
             @Override
             public RecyclerView.LayoutParams generateDefaultLayoutParams() {
                 return null;
@@ -72,16 +73,12 @@ public class ListMessageFragment extends Fragment implements RecyclerViewAdapter
         recyclerView.addItemDecoration(dividerItemDecoration);
 
 
-
-
-
-
         return rootView;
     }
 
     @Override
     public void onItemClick(View view, int position) {
-        Toast.makeText(getActivity(), "You clicked " + adapter.getItem(position) + 1+ " on row number " + position, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), "You clicked " + adapter.getItem(position) + 1 + " on row number " + position, Toast.LENGTH_SHORT).show();
 
     }
 }

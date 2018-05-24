@@ -23,12 +23,14 @@ public class RecyclerViewAdapterMessages extends RecyclerView.Adapter<RecyclerVi
         this.mInflater = LayoutInflater.from(context);
         this.mData = data;
     }
+
     public RecyclerViewAdapterMessages(RecyclerViewAdapterMessages.ItemClickListener listener, Context context, List<String> data) {
         Log.v("uuu11", "RecyclerViewAdapterMessages object made");
         this.mInflater = LayoutInflater.from(context);
         this.mData = data;
         mClickListener = listener;
     }
+
     // inflates row layout from xml whenever needs
     @Override
     public RecyclerViewAdapterMessages.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -49,6 +51,20 @@ public class RecyclerViewAdapterMessages extends RecyclerView.Adapter<RecyclerVi
         return mData.size();
     }
 
+    // method for getting data at clicked position
+    public String getItem(int id) {
+        return mData.get(id);
+    }
+
+    // allowing to click event to be caught
+    public void setClickListener(RecyclerViewAdapterMessages.ItemClickListener itemClickListener) {
+        this.mClickListener = itemClickListener;
+    }
+
+    // parent activity would implement this methods for responding to click event
+    public interface ItemClickListener {
+        void onItemClick(View view, int position);
+    }
 
     // recycles views , stores as they will be scrolled off screen
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -64,20 +80,5 @@ public class RecyclerViewAdapterMessages extends RecyclerView.Adapter<RecyclerVi
         public void onClick(View view) {
             if (mClickListener != null) mClickListener.onItemClick(view, getAdapterPosition());
         }
-    }
-
-    // method for getting data at clicked position
-   public String getItem(int id) {
-        return mData.get(id);
-    }
-
-    // allowing to click event to be caught
-   public void setClickListener(RecyclerViewAdapterMessages.ItemClickListener itemClickListener) {
-        this.mClickListener = itemClickListener;
-    }
-
-    // parent activity would implement this methods for responding to click event
-    public interface ItemClickListener {
-        void onItemClick(View view, int position);
     }
 }

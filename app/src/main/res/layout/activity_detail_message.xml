@@ -7,15 +7,15 @@
     <LinearLayout
         android:id="@+id/fragments_message_list_linear_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:background="@android:color/darker_gray"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical">
+
         <FrameLayout
+            android:id="@+id/FRAGMENT_CONTAINER_ONE"
             android:layout_width="300dp"
             android:layout_height="match_parent"
-            android:id="@+id/FRAGMENT_CONTAINER_ONE"
-            android:scaleType= "centerInside"/>
+            android:scaleType="centerInside" />
 
 
     </LinearLayout>

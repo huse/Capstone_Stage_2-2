@@ -28,11 +28,7 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 
-public class ContentMessageFragment  extends Fragment implements RecyclerViewAdapterMessages.ItemClickListener,View.OnClickListener{
-    public ContentMessageFragment(){
-
-    }
-
+public class ContentMessageFragment extends Fragment implements RecyclerViewAdapterMessages.ItemClickListener, View.OnClickListener {
     @BindView(R.id.edit_query)
     EditText editTextQuery;
     @BindView(R.id.send_button)
@@ -43,15 +39,19 @@ public class ContentMessageFragment  extends Fragment implements RecyclerViewAda
     View rootView;
     private FirebaseListAdapter<GetSetMessage> firebaseListAdapter;
 
+    public ContentMessageFragment() {
+
+    }
+
     @Override
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup viewGroup, Bundle bundle) {
 
 
-         rootView = layoutInflater.inflate(R.layout.fragment_message_content, viewGroup, false);
+        rootView = layoutInflater.inflate(R.layout.fragment_message_content, viewGroup, false);
 
 
         sendingButton = (ImageButton) rootView.findViewById(R.id.send_button);
-         listOfMessages = (ListView)rootView.findViewById(R.id.list_of_messages_in_activity);
+        listOfMessages = (ListView) rootView.findViewById(R.id.list_of_messages_in_activity);
         sendingButton.setOnClickListener(this);
         LinearLayout linearLayout = rootView.findViewById(R.id.linear_message_list);
         // RecyclerViewAdapter adapter;
@@ -75,13 +75,13 @@ public class ContentMessageFragment  extends Fragment implements RecyclerViewAda
         // Log.v("hhh",getView().toString());
         RecyclerView recyclerView = rootView.findViewById(R.id.rvMessageMessages);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerViewAdapterMessages = new RecyclerViewAdapterMessages(this,getActivity(),placeHolder);
+        recyclerViewAdapterMessages = new RecyclerViewAdapterMessages(this, getActivity(), placeHolder);
         //adapter.setClickListener(new LinearLayoutManager(getActivity());
         recyclerView.setAdapter(recyclerViewAdapterMessages);
 
         // setup layoutManager
 
-        LinearLayoutManager  layoutManager = new LinearLayoutManager (getContext()) {
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext()) {
             @Override
             public RecyclerView.LayoutParams generateDefaultLayoutParams() {
                 return null;
@@ -99,26 +99,22 @@ public class ContentMessageFragment  extends Fragment implements RecyclerViewAda
         displayChatMessages();
 
 
-
-
         return rootView;
     }
 
     @Override
     public void onItemClick(View view, int position) {
-        Toast.makeText(getActivity(), "You clicked content " + recyclerViewAdapterMessages.getItem(position) + 1+ " on row number " + position, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), "You clicked content " + recyclerViewAdapterMessages.getItem(position) + 1 + " on row number " + position, Toast.LENGTH_SHORT).show();
 
         int i = view.getId();
         if (i == R.id.send_button) {
             Toast.makeText(getActivity(), "You clicked " + "send_button", Toast.LENGTH_SHORT).show();
-            Log.v("hhh","send pressed");
+            Log.v("hhh", "send pressed");
             sendMessage();
         } else if (i == R.id.send_button) {
         }
 
     }
-
-
 
 
     @Override
@@ -126,15 +122,15 @@ public class ContentMessageFragment  extends Fragment implements RecyclerViewAda
         int i = v.getId();
         if (i == R.id.send_button) {
             Toast.makeText(getActivity(), "You clicked " + "send_button", Toast.LENGTH_SHORT).show();
-            Log.v("hhh","send pressed");
+            Log.v("hhh", "send pressed");
             sendMessage();
         } else if (i == R.id.send_button) {
         }
 
     }
 
-    public void sendMessage(){
-        EditText input = (EditText)rootView.findViewById(R.id.edit_query);
+    public void sendMessage() {
+        EditText input = (EditText) rootView.findViewById(R.id.edit_query);
 
         // Read the input field and push a new instance
         // of ChatMessage to the Firebase database
@@ -144,12 +140,13 @@ public class ContentMessageFragment  extends Fragment implements RecyclerViewAda
                 .setValue(new GetSetMessage(input.getText().toString(),
                         FirebaseAuth.getInstance()
                                 .getCurrentUser()
-                                .getDisplayName(),FirebaseAuth.getInstance()
+                                .getDisplayName(), FirebaseAuth.getInstance()
                         .getCurrentUser()
-                        .getEmail(),FirebaseAuth.getInstance()
-                        .getCurrentUser()
-                        .getPhotoUrl().toString())
-                );
+                        .getEmail()
+                        //,FirebaseAuth.getInstance()
+                        //.getCurrentUser()
+                        // .getPhotoUrl().toString())
+                ));
 
         // Clear the input
         input.setText("");
@@ -162,9 +159,9 @@ public class ContentMessageFragment  extends Fragment implements RecyclerViewAda
             @Override
             protected void populateView(View v, GetSetMessage model, int position) {
                 // Get references to the views of messageformat.xml
-                TextView messageText = (TextView)v.findViewById(R.id.message_content);
-                TextView messageUser = (TextView)v.findViewById(R.id.sender_user);
-                TextView messageTime = (TextView)v.findViewById(R.id.date_time);
+                TextView messageText = (TextView) v.findViewById(R.id.message_content);
+                TextView messageUser = (TextView) v.findViewById(R.id.sender_user);
+                TextView messageTime = (TextView) v.findViewById(R.id.date_time);
 
                 // Set their text
                 messageText.setText(model.getMessageText());

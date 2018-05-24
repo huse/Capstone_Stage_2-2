@@ -8,8 +8,8 @@ import android.util.Log;
 import android.view.View;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
+//import com.google.firebase.storage.FirebaseStorage;
+//import com.google.firebase.storage.StorageReference;
 import com.hpr.hus.capstone_stage_2.R;
 import com.hpr.hus.capstone_stage_2.login.LoginActivity3;
 import com.hpr.hus.capstone_stage_2.recycler.RecyclerViewAdapterList;
@@ -23,12 +23,12 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_3);
         FirebaseAnalytics mFirebaseAnalytics;
-        StorageReference mStorageRef;
+       // StorageReference mStorageRef;
 
         // Obtain the FirebaseAnalytics instance.
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
-        mStorageRef = FirebaseStorage.getInstance().getReference();
+      //  mStorageRef = FirebaseStorage.getInstance().getReference();
 
 
         Bundle selectedBundle = new Bundle();

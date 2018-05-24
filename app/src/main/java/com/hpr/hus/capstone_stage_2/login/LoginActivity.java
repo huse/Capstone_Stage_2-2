@@ -259,17 +259,17 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             signIn(mEmailView.getText().toString(), mPasswordView.getText().toString());
 
         } else if (i == R.id.sign_out_button) {
-            Toast.makeText(LoginActivity.this, "sign_out_button",
+            Toast.makeText(LoginActivity.this, R.string.sign_out,
                     Toast.LENGTH_SHORT).show();
             // signOut();
         } else if (i == R.id.verify_email_button) {
             sendEmailVerification();
         } else if (i == R.id.go_to_messages_button) {
-            Toast.makeText(LoginActivity.this, "go_to_messages_button",
+            Toast.makeText(LoginActivity.this, R.string.go_to_messages,
                     Toast.LENGTH_SHORT).show();
             runnignIntentActivity();
         } else if (i == R.id.nav_sign_in) {
-            Toast.makeText(LoginActivity.this, "nav_sign_in",
+            Toast.makeText(LoginActivity.this, R.string.sign_in,
                     Toast.LENGTH_SHORT).show();
             signIn(mEmailView.getText().toString(), mPasswordView.getText().toString());
 
@@ -683,23 +683,23 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             signIn(mEmailView.getText().toString(), mPasswordView.getText().toString());
 
         } else if (id == R.id.nav_create_account) {
-            Toast.makeText(LoginActivity.this, "nav_create_account",
+            Toast.makeText(LoginActivity.this, R.string.create_account,
                     Toast.LENGTH_SHORT).show();
             createAccount(mEmailView.getText().toString(), mPasswordView.getText().toString());
         } else if (id == R.id.nav_verify_email) {
-            Toast.makeText(LoginActivity.this, "nav_verify_email",
+            Toast.makeText(LoginActivity.this, R.string.verify_email,
                     Toast.LENGTH_SHORT).show();
             sendEmailVerification();
         } else if (id == R.id.nav_sign_out) {
-            Toast.makeText(LoginActivity.this, "nav_sign_out",
+            Toast.makeText(LoginActivity.this, R.string.sign_out ,
                     Toast.LENGTH_SHORT).show();
             signOut();
         } else if (id == R.id.nav_go_to_messages) {
-            Toast.makeText(LoginActivity.this, "nav_go_to_messages",
+            Toast.makeText(LoginActivity.this, R.string.go_to_messages,
                     Toast.LENGTH_SHORT).show();
             attemptLogin();
         } else if (id == R.id.nav_Setting) {
-            Toast.makeText(LoginActivity.this, "nav_Setting",
+            Toast.makeText(LoginActivity.this, R.string.action_settings,
                     Toast.LENGTH_SHORT).show();
 
         }

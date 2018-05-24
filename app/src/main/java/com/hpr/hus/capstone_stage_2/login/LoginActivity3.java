@@ -282,7 +282,7 @@ public class LoginActivity3 extends AppCompatActivity implements LoaderCallbacks
     public void onClick(View v) {
         int i = v.getId();
         if (i == R.id.email_create_account_button) {
-            Toast.makeText(LoginActivity3.this, "email_create_account_button  pressed",
+            Toast.makeText(LoginActivity3.this, R.string.create_account,
                     Toast.LENGTH_SHORT).show();
             createAccount(mEmailView.getText().toString(), mPasswordView.getText().toString());
         } else if (i == R.id.email_sign_in_button) {
@@ -293,11 +293,11 @@ public class LoginActivity3 extends AppCompatActivity implements LoaderCallbacks
         } else if (i == R.id.verify_email_button) {
             sendEmailVerification();
         } else if (i == R.id.go_to_messages_button) {
-            Toast.makeText(LoginActivity3.this, "go_to_messages_button",
+            Toast.makeText(LoginActivity3.this, R.string.go_to_messages,
                     Toast.LENGTH_SHORT).show();
             runnignIntentActivity(mAuth);
         } else if (i == R.id.nav_sign_in) {
-            Toast.makeText(LoginActivity3.this, "nav_sign_in",
+            Toast.makeText(LoginActivity3.this, R.string.sign_in,
                     Toast.LENGTH_SHORT).show();
             signIn(mEmailView.getText().toString(), mPasswordView.getText().toString());
 

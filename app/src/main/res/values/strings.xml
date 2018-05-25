@@ -61,7 +61,7 @@
     <string name="Go_To_Messages">Go To Messages</string>
     <string name="Setting">Setting</string>
     <string name="Title">Title</string>
-    <string name="Waiting_for_loading_information">Waiting for loading information</string>
+    <string name="Waiting_for_loading_information">Open messages screen to load info here.</string>
     <string name="Display_name">Display name</string>
     <string name="User_name">User name</string>
     <string name="User_picture_URL">User picture URL</string>

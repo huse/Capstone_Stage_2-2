@@ -67,7 +67,7 @@ package com.hpr.hus.capstone_stage_2.trash;
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(EmailPasswordActivity.this, "Authentication failed.",
+                            Toast.makeText(EmailPasswordActivity.this, R.string.Authentication_failed,
                                     Toast.LENGTH_SHORT).show();
                             updateUI(null);
                         }
@@ -101,7 +101,7 @@ package com.hpr.hus.capstone_stage_2.trash;
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithEmail:failure", task.getException());
-                            Toast.makeText(EmailPasswordActivity.this, "Authentication failed.",
+                            Toast.makeText(EmailPasswordActivity.this, R.string.Authentication_failed,
                                     Toast.LENGTH_SHORT).show();
                             updateUI(null);
                         }
@@ -139,12 +139,12 @@ package com.hpr.hus.capstone_stage_2.trash;
 
                         if (task.isSuccessful()) {
                             Toast.makeText(EmailPasswordActivity.this,
-                                    "Verification email sent to " + user.getEmail(),
+                                    R.string.Verification_email_sent_to  + user.getEmail(),
                                     Toast.LENGTH_SHORT).show();
                         } else {
                             Log.e(TAG, "sendEmailVerification", task.getException());
                             Toast.makeText(EmailPasswordActivity.this,
-                                    "Failed to send verification email.",
+                                    R.string.Failed_to_send_verification_email,
                                     Toast.LENGTH_SHORT).show();
                         }
                         // [END_EXCLUDE]

@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
     //Adding action lestenter to recyclereview.
     @Override
     public void onItemClick(View view, int position) {
-        // Toast.makeText(this, "You clicked " + adapter.getItem(position) + " on row number " + position, Toast.LENGTH_SHORT).show();
+        // Toast.makeText(this, R.string.You_clicked + adapter.getItem(position) + R.string.on_row_number + position, Toast.LENGTH_SHORT).show();
     }
 
 

@@ -78,7 +78,7 @@ public class ListMessageFragment extends Fragment implements RecyclerViewAdapter
 
     @Override
     public void onItemClick(View view, int position) {
-        Toast.makeText(getActivity(), "You clicked " + adapter.getItem(position) + 1 + " on row number " + position, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), R.string.You_clicked + adapter.getItem(position) + 1 + R.string.on_row_number + position, Toast.LENGTH_SHORT).show();
 
     }
 }

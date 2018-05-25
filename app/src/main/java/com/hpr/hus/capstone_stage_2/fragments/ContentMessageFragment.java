@@ -104,11 +104,11 @@ public class ContentMessageFragment extends Fragment implements RecyclerViewAdap
 
     @Override
     public void onItemClick(View view, int position) {
-        Toast.makeText(getActivity(), "You clicked content " + recyclerViewAdapterMessages.getItem(position) + 1 + " on row number " + position, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), R.string.You_clicked + recyclerViewAdapterMessages.getItem(position) + 1 + R.string.on_row_number + position, Toast.LENGTH_SHORT).show();
 
         int i = view.getId();
         if (i == R.id.send_button) {
-            Toast.makeText(getActivity(), "You clicked " + "send_button", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), R.string.You_clicked + R.string.send_button, Toast.LENGTH_SHORT).show();
             Log.v("hhh", "send pressed");
             sendMessage();
         } /*else if (i == R.id.send_button) {
@@ -121,7 +121,7 @@ public class ContentMessageFragment extends Fragment implements RecyclerViewAdap
     public void onClick(View v) {
         int i = v.getId();
         if (i == R.id.send_button) {
-            Toast.makeText(getActivity(), "You clicked " + "send_button", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), R.string.You_clicked + R.string.send_button, Toast.LENGTH_SHORT).show();
             Log.v("hhh", "send pressed");
             sendMessage();
         } /*else if (i == R.id.send_button) {

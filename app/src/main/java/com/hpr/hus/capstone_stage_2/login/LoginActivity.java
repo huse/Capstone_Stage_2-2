@@ -162,7 +162,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     }
 
     public void toastingMessage() {
-        Toast.makeText(LoginActivity.this, "This is for test.",
+        Toast.makeText(LoginActivity.this, R.string.for_test,
                 Toast.LENGTH_SHORT).show();
     }
 
@@ -304,14 +304,14 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            Toast.makeText(LoginActivity.this, "Authentication passed.",
+                            Toast.makeText(LoginActivity.this, R.string.Authentication_passed,
                                     Toast.LENGTH_SHORT).show();
                             updateUI(user);
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
                             if(task.getException()!=null)
-                            Toast.makeText(LoginActivity.this, "Authentication failed." + task.getException().toString(),
+                            Toast.makeText(LoginActivity.this, R.string.Authentication_failed + task.getException().toString(),
                                     Toast.LENGTH_SHORT).show();
                             updateUI(null);
                         }
@@ -386,7 +386,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithEmail:failure", task.getException());
-                            Toast.makeText(LoginActivity.this, "Authentication failed.",
+                            Toast.makeText(LoginActivity.this, R.string.Authentication_failed ,
                                     Toast.LENGTH_SHORT).show();
                             updateUI(null);
                         }
@@ -424,12 +424,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
                         if (task.isSuccessful()) {
                             Toast.makeText(LoginActivity.this,
-                                    "Verification email sent to " + user.getEmail(),
+                                    R.string.Verification_email_sent_to + user.getEmail(),
                                     Toast.LENGTH_SHORT).show();
                         } else {
                             Log.e(TAG, "sendEmailVerification", task.getException());
                             Toast.makeText(LoginActivity.this,
-                                    "Failed to send verification email.",
+                                    R.string.Failed_to_send_verification_email,
                                     Toast.LENGTH_SHORT).show();
                         }
                         // [END_EXCLUDE]
@@ -672,13 +672,13 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
-        Toast.makeText(LoginActivity.this, "getItemId  fff",
+        Toast.makeText(LoginActivity.this, R.string.getItemId,
                 Toast.LENGTH_SHORT).show();
         int id = item.getItemId();
-        Toast.makeText(LoginActivity.this, "getItemId  " + id,
+        Toast.makeText(LoginActivity.this, R.string.getItemId + id,
                 Toast.LENGTH_SHORT).show();
         if (id == R.id.nav_sign_in) {
-            Toast.makeText(LoginActivity.this, "nav_sign_in",
+            Toast.makeText(LoginActivity.this, R.string.sign_in,
                     Toast.LENGTH_SHORT).show();
             signIn(mEmailView.getText().toString(), mPasswordView.getText().toString());
 

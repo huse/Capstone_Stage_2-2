@@ -67,6 +67,16 @@
     <string name="User_picture_URL">User picture URL</string>
     <string name="Update_profile">Update profile</string>
     <string name="Welcome">Welcome</string>
+    <string name="Authentication_failed">Authentication failed.</string>
+    <string name="Failed_to_send_verification_email">Failed to send verification email.</string>
+    <string name="Verification_email_sent_to">Verification email sent to </string>
+    <string name="You_clicked">You clicked </string>
+    <string name="send_button">Send button</string>
+    <string name="for_test">This is for test.</string>
+    <string name="Authentication_passed">Authentication passed.</string>
+    <string name="getItemId">getItemId </string>
+    <string name="on_row_number"> on row number </string>
+
 
 
 

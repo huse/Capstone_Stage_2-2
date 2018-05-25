@@ -134,7 +134,7 @@ public class MessageActivity extends AppCompatActivity implements View.OnClickLi
     public void onClick(View v) {
         int i = v.getId();
         if (i == R.id.send_button) {
-            Toast.makeText(this, "You clicked " + "send_button", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.You_clicked + R.string.send_button, Toast.LENGTH_SHORT).show();
             Log.v("hhh", "send pressed");
             sendMessage();
         } /*else if (i == R.id.send_button) {
